@@ -239,7 +239,7 @@ public class QuestionController extends AbstractContextAwareController {
 //			logger.info(j + " : " + destinataires[j].getAddress());
 //		}
 		try {
-			String subject = "[esup-agent] " + getCurrentUser().getDisplayName()
+			String subject = "[esup-agent] " + getDisplayUser().getDisplayName()
 								+ " (" + getDisplayUser().getAgent().getSupannEmpId() + ")"
 								+ " : " + titre;
 			if (destinataires==null || destinataires.length == 0) {
@@ -247,7 +247,7 @@ public class QuestionController extends AbstractContextAwareController {
 				destinataires = new InternetAddress[] { new InternetAddress(contact) };
 			}
 				logger.info(destinataires[0].toString());
-				sendEmail(new InternetAddress(getCurrentUser().getMail()), destinataires, subject, message);
+				sendEmail(new InternetAddress(getDisplayUser().getMail()), destinataires, subject, message);
 			FacesMessage fm = new FacesMessage("Le message a \u00E9t\u00E9 envoy\u00E9");
             FacesContext.getCurrentInstance().addMessage(null,fm);
 		} catch (AddressException e) {

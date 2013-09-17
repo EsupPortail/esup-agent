@@ -59,4 +59,8 @@ public abstract class AbstractContextAwareController extends AbstractDomainAware
 		return sessionController.getCurrentUser();
 	}
 
+	protected User getDisplayUser() {
+		return sessionController.getDisplayUser();
+	}
+
 }

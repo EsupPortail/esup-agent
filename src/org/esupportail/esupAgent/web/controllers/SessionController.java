@@ -77,6 +77,12 @@ public class SessionController extends AbstractDomainAwareBean {
 		return authenticator.getUser();
 	}
 
+	public User getDisplayUser() {
+		User user = getUserLoginUnder();
+		if (user == null) user = getCurrentUser();
+		return user;
+	}
+
 	/**
 	 * @return true if the login button should be printed. 
 	 */
