@@ -111,9 +111,9 @@ public class ContratController extends AbstractContextAwareController {
 		TreeNodeBase treeNodeBase;
 		AvenantContratDto[] lstAvenantContratDto;
 		Comparator<AvenantContratDto> eltComparaison = new AvenantContratSort();
-		if (getDisplayUser().getAgent().getConsulterContrats() != null) {
-			for (InformationsContratsDto informationsContratsDto : getDisplayUser()
-					.getAgent().getConsulterContrats()) {
+		InformationsContratsDto[] contrats = getDisplayUser().getAgent().getConsulterContrats();
+		if (contrats != null) {
+			for (InformationsContratsDto informationsContratsDto : contrats) {
 				treeNodeBase = new InformationsContratsNode(
 						informationsContratsDto);
 				lstAvenantContratDto = informationsContratsDto
@@ -128,6 +128,10 @@ public class ContratController extends AbstractContextAwareController {
 				rootNode.getChildren().add(treeNodeBase);
 			}
 			this.contratTree = new TreeModelBase(rootNode);
+
+			for (int i = 0; i < contrats.length; i++) {
+			    this.contratTree.getTreeState().expandPath(this.contratTree.getPathInformation("0:" + i));
+			}
 		} else {
 			this.contratTree = null;
 		}

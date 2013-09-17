@@ -102,19 +102,17 @@ public class CarriereController extends AbstractContextAwareController {
 			return null;
 		}
 
-		if (getDisplayUser().getAgent().getConsulterCarriere() != null) {
+		CarriereDto_V2[] carriere = getDisplayUser().getAgent().getConsulterCarriere();
+		if (carriere != null) {
 
 			logger
 					.debug("Nombre de séquence carrière : "
-							+ getDisplayUser().getAgent()
-									.getConsulterCarriere().length);
-			if (getDisplayUser().getAgent().getConsulterCarriere().length == 1) {
-				currentCarriereDto = getDisplayUser().getAgent()
-						.getConsulterCarriere()[0];
+							+ carriere.length);
+			if (carriere.length == 1) {
+				currentCarriereDto = carriere[0];
 			}
 
-			for (CarriereDto_V2 carriereDto : getDisplayUser().getAgent()
-					.getConsulterCarriere()) {
+			for (CarriereDto_V2 carriereDto : carriere) {
 				logger.debug("TYPE POPULATION "
 						+ carriereDto.getTypePopulationDto()
 								.getTemoinEnseignant());
@@ -145,9 +143,10 @@ public class CarriereController extends AbstractContextAwareController {
 			}
 
 			this.carriereTree = new TreeModelBase(rootNode);
-			String[] expandPaths = this.carriereTree.getPathInformation("0:0");
-			this.carriereTree.getTreeState().expandPath(expandPaths);
 
+			for (int i = 0; i < carriere.length; i++) {
+			    this.carriereTree.getTreeState().expandPath(this.carriereTree.getPathInformation("0:" + i));
+			}
 		} else {
 			this.carriereTree = null;
 		}
