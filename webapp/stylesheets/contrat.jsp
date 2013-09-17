@@ -1,5 +1,5 @@
 <%@include file="_include.jsp"%>
-<e:page stringsVar="msgs" menuItem="about"
+<e:page stringsVar="msgs" menuItem="contrat"
 	locale="#{sessionController.locale}"
 	authorized="#{aboutController.pageAuthorized}" footer="">
 <t:div styleClass="esupAgent">
