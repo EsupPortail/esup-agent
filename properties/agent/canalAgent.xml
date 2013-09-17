@@ -26,6 +26,7 @@
 		</property>
 		<property name="contactHarpege" value="${agent.contactHarpege}">
 		</property>
+		<property name="contactHarpegeBiatss" value="${agent.contactHarpegeBiatss}" />
 		<property name="wsdl_anonymous" value="${wsdl.anonymous}"></property>
 		<property name="wsdl_usr_name" value="${wsdl.usr_name}"></property>
 		<property name="wsdl_usr_password" value="${wsdl.usr_password}"></property>

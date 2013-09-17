@@ -83,6 +83,7 @@
 		parent="abstractContextAwareController" scope="session">
 		<description>A bean to manage the question page.</description>
 		<property name="smtpService" ref="smtpService" />
+		<property name="ldapUserService" ref="ldapUserService" />
 	</bean>
 
 

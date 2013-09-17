@@ -22,6 +22,7 @@ import org.esupportail.commons.services.smtp.SmtpUtils;
 import org.esupportail.esupAgent.domain.beans.ContactMail;
 import org.esupportail.esupAgent.domain.beans.EnvoiMail;
 import org.esupportail.esupAgent.domain.beans.User;
+import org.esupportail.esupAgent.domain.beans.config.ConfigAgent;
 import org.esupportail.esupAgent.services.application.AgentApplicationServiceImpl;
 
 public class QuestionController extends AbstractContextAwareController {
@@ -243,7 +244,13 @@ public class QuestionController extends AbstractContextAwareController {
 								+ " (" + getDisplayUser().getAgent().getSupannEmpId() + ")"
 								+ " : " + titre;
 			if (destinataires==null || destinataires.length == 0) {
-				String contact = ((AgentApplicationServiceImpl) getApplicationService()).getConfigAgent().getContactHarpege();
+				LdapUser ldapUser = ldapUserService.getLdapUser(getDisplayUser().getId());
+				String eppa = ldapUser.getAttribute("eduPersonPrimaryAffiliation");
+
+				ConfigAgent configAgent = 
+					((AgentApplicationServiceImpl) getApplicationService()).getConfigAgent();
+				String contact = "staff".equals(eppa) ? configAgent.getContactHarpegeBiatss() : configAgent.getContactHarpege();
+
 				destinataires = new InternetAddress[] { new InternetAddress(contact) };
 			}
 				logger.info(destinataires[0].toString());

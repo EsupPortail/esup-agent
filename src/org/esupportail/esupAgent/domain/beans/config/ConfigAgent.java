@@ -32,6 +32,7 @@ public class ConfigAgent implements InitializingBean {
 	
 
 	private String contactHarpege;
+	private String contactHarpegeBiatss;
 
 	private boolean wsdl_anonymous;
 
@@ -120,6 +121,20 @@ public class ConfigAgent implements InitializingBean {
 	 */
 	public void setContactHarpege(String contactHarpege) {
 		this.contactHarpege = contactHarpege;
+	}
+
+	/**
+	 * @return the contactHarpegeBiatss
+	 */
+	public String getContactHarpegeBiatss() {
+		return contactHarpegeBiatss;
+	}
+
+	/**
+	 * @param contactHarpegeBiatss the contactHarpegeBiatss to set
+	 */
+	public void setContactHarpegeBiatss(String contactHarpegeBiatss) {
+		this.contactHarpegeBiatss = contactHarpegeBiatss;
 	}
 
 	/**
