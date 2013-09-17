@@ -74,7 +74,7 @@ public class UIForm extends javax.faces.component.UIForm {
 		Div div = new Div();
 		div.setId("submitPopup");
 		div.setStyleClass("form-submit-popup");
-		div.setStyle("visibility: hidden");
+		div.setStyle("display: none");
 		div.setRendered(true);
 		getChildren().add(div);
 		// add the image to the div

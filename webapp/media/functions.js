@@ -367,7 +367,8 @@ function onFormSubmit2(form, freezeScreen, showText, showImage) {
 		var popupId = form.id+":submitPopup";
 		var popup = document.getElementById(popupId);
 		if (popup) {
-			popup.style.visibility = 'visible';
+			//popup.style.visibility = 'visible';
+			popup.style.display = 'block';
 			if (showImage) {
 				var popupImageId = form.id+":submitPopupImage";
 				var popupImage = document.getElementById(popupImageId);
