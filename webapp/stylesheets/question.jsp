@@ -1,7 +1,7 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="about"
 	locale="#{sessionController.locale}"
-	authorized="#{questionController.pageAuthorized}">
+	authorized="#{questionController.pageAuthorized}" footer="">
 
 	<t:div styleClass="esupAgent">
 		<%@include file="_navigation.jsp"%>

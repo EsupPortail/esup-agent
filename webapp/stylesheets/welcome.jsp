@@ -2,7 +2,7 @@
 
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="welcome"
-	locale="#{sessionController.locale}">
+	locale="#{sessionController.locale}" footer="">
 
 	<t:div styleClass="esupAgent">
 		<%@include file="_navigation.jsp"%>
