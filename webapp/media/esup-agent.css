@@ -3,6 +3,7 @@
 div.esupAgent {
 	font-size: 12px;
 	padding-bottom: 14px;
+	max-width: 900px;
 }
 div.esupAgent h1{
 	color: rgb(185, 158, 126);
@@ -116,9 +117,23 @@ div.esupAgent .esup-agent-portlet-display-list {
 div.esupAgent .esup-agent-portlet-display-detail {
 	border-left: 1px solid #ffffff;
 	display: table-cell;
-	width: 600px;
-	padding: 25px;
+	padding-left: 25px;
 	/*background: #ffffff;*/
+}
+
+div.esupAgent .esup-agent-portlet-display-detail .portlet-subsection-header:first-child {
+       margin-top: 0 !important;
+}
+
+@media (max-width: 767px) { 
+   div.esupAgent .esup-agent-portlet-display-list {
+       display: block;
+       width: auto;
+   }
+   div.esupAgent .esup-agent-portlet-display-detail {
+       padding-left: 0;
+       padding-top: 1.2em;
+   }
 }
 
 div.esupAgent .esup-agent-warning {
