@@ -20,46 +20,36 @@
 
 			<h:panelGroup
 				rendered="#{avancementController.displayUser.agent.consulterDonneesActuelles!=null}">
-				<h:outputText value="#{msgs['AVANCEMENT.TEXT.INM']} actuel : "
-					styleClass="portlet-form-label" />
-				<h:outputText
-					value="#{avancementController.displayUser.agent.consulterDonneesActuelles}"
-					styleClass="portlet-font" />
+				<h:outputText value="#{msgs['AVANCEMENT.TEXT.INM']} actuel #{avancementController.displayUser.agent.consulterDonneesActuelles}." />
 			</h:panelGroup>
-			<h:dataTable title="Avancement" id="avancement"
-				value="#{avancementController.displayUser.agent.consulterDonneesAvancement}"
-				var="avancement" columnClasses="list-column-center"
-				headerClass="portlet-table-header" rowClasses="portlet-font"
-				width="50%" cellspacing="5" cellpadding="2"
-				rendered="#{avancementController.displayUser.agent.consulterDonneesAvancement!= null}">
+			<t:div/>
+			<h:panelGroup rendered="#{avancementController.displayUser.agent.avancement != null}">
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{msgs['AVANCEMENT.TEXT.INM']}" />
-					</f:facet>
-					<h:panelGroup>
-						<h:outputText value="#{avancement.indiceMajoreFutur} "
-							rendered="#{avancement.indiceMajoreFutur!=null}" />
-						<h:outputText
-							value="#{avancement.echelonFuturDto.libelleEchelonFutur}"
-							rendered="#{avancement.echelonFuturDto.libelleEchelonFutur!=null}" />
-					</h:panelGroup>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{msgs['AVANCEMENT.TEXT.DATEPREVISION']}" />
-					</f:facet>
-					<h:outputText value="#{avancement.datePrevisionnelle.time}"
-						rendered="#{avancement.datePrevisionnelle!=null}">
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"
-							locale="Locale.FRANCE" />
-					</h:outputText>
-				</h:column>
-			</h:dataTable>
+				<h:outputText value="Dernier passage le " rendered="#{!avancementController.displayUser.agent.avancement.dateDernierChangementEstFuture}" />
+				<h:outputText value="Prochain passage le " rendered="#{avancementController.displayUser.agent.avancement.dateDernierChangementEstFuture}" />
 
+				<h:outputText value="#{avancementController.displayUser.agent.avancement.dateDernierChangement}">
+				  <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"
+						     locale="Locale.FRANCE" />
+				</h:outputText>
 
+				<h:outputText value=" à l'échelon #{avancementController.displayUser.agent.avancement.echelonDernierChangement}." />
 
+				<t:div style="margin-top: 1em;"/>
 
+				<h:outputText value="Prochain passage dans " rendered="#{!avancementController.displayUser.agent.avancement.dateDernierChangementEstFuture}" />
+				<h:outputText value="Passage suivant dans " rendered="#{avancementController.displayUser.agent.avancement.dateDernierChangementEstFuture}" />
+
+				<h:outputText value="#{avancementController.displayUser.agent.avancement.moisAvantProchainChangementPrevisionnelMin}" />
+				<h:outputText value=" à #{avancementController.displayUser.agent.avancement.moisAvantProchainChangementPrevisionnelMax}" rendered="#{avancementController.displayUser.agent.avancement.moisAvantProchainChangementPrevisionnelMin != avancementController.displayUser.agent.avancement.moisAvantProchainChangementPrevisionnelMax}" />
+				<h:outputText value=" mois. (*)"/>
+ 				<t:div/><h:outputText value="Précision : vous avez une réduction potentielle de passage d'échelon. (*)" rendered="#{avancementController.displayUser.agent.avancement.bonificationEchelon}" />
+				<t:div/><h:outputText value="Précision : vous avez un reliquat d'ancienneté. (*)" rendered="#{avancementController.displayUser.agent.avancement.reliquatAnciennete}" />
+
+				<t:div style="margin-top: 1em;"/>
+ 				<h:outputText value="(*) Les informations fournies relatives à votre avancement sont données à titre informatif et ne sont pas garanties."/>
+
+			</h:panelGroup>
 
 		</h:panelGroup>
 

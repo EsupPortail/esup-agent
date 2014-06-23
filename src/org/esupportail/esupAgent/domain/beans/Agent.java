@@ -641,6 +641,11 @@ public class Agent {
 
 	}
 
+	public Avancement getAvancement() {
+		DonneesAvancementDto[] l = getConsulterDonneesAvancement();
+		return l != null && l.length > 0 && l[0].getDatePrevisionnelle() != null ? new Avancement(l[0]) : null;
+	}
+
 	public DonneesAvancementDto[] getConsulterDonneesAvancement() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
