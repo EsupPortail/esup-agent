@@ -8,7 +8,7 @@
 
 <h:panelGrid border="0" columns="3" cellpadding="10" width="100%"
 	styleClass="esup-agent-entete" rendered="#{sessionController.currentUser != null}">
-	<h:outputText
+	<h:outputText rendered="#{sessionController.currentUser.agent.consultationEtatCivil.individuReponseEtatCivil.numen != null}" 
 		value="Numen : #{sessionController.currentUser.agent.consultationEtatCivil.individuReponseEtatCivil.numen}"
 		styleClass="portlet-section-header" />
 	<h:outputText

@@ -240,13 +240,18 @@ public class Agent {
 	 * @return the consulterDiplomes
 	 */
 	public ConsultationDiplomesReponseWSDto getConsulterDiplomes() {
+		consulterDiplomes = null;
 		try {
 
 			consulterDiplomes = dossierRhPersonnelWS
 					.consulterDiplomes(supannEmpId);
-			Comparator<ConsultationDiplomesDto> eltComparaison = new DiplomeSort();
-			Arrays.sort(consulterDiplomes.getConsultationDiplomesDto(),
-					eltComparaison);
+			logger.info("consulterDiplomes " + consulterDiplomes.toString());
+			logger.info("consulterDiplomes " + consulterDiplomes.getTaille());
+			if (consulterDiplomes.getTaille() != 0) {
+				Comparator<ConsultationDiplomesDto> eltComparaison = new DiplomeSort();
+				Arrays.sort(consulterDiplomes.getConsultationDiplomesDto(),
+						eltComparaison);
+			}
 
 		} catch (HarpegeTechniqueException ex) {
 			ex.printStackTrace();
@@ -310,7 +315,7 @@ public class Agent {
 	public InformationsContratsDto[] getConsulterContrats() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		InformationsContratsReponseWSDto informationsContratsReponseWSDto;
-		InformationsContratsDto[] lstContrats=null;
+		InformationsContratsDto[] lstContrats = null;
 		try {
 			dossierRhAdministratifWebServiceServiceLocator = new DossierRhAdministratifWebServiceServiceLocator();
 			dossierRhAdministratifWebServiceServiceLocator
@@ -320,15 +325,15 @@ public class Agent {
 			try {
 				informationsContratsReponseWSDto = dossierRhAdministratifWebSerice
 						.consulterInformationsContrats(supannEmpId, null);
-				
-					lstContrats = informationsContratsReponseWSDto
-							.getInformationsContratsDto();
-				
-					if (lstContrats != null) {
-						Comparator<InformationsContratsDto> eltComparaison = new ContratSort();
-						Arrays.sort(lstContrats, eltComparaison);
-					}
-				
+
+				lstContrats = informationsContratsReponseWSDto
+						.getInformationsContratsDto();
+
+				if (lstContrats != null) {
+					Comparator<InformationsContratsDto> eltComparaison = new ContratSort();
+					Arrays.sort(lstContrats, eltComparaison);
+				}
+
 				return lstContrats;
 			} catch (HarpegeTechniqueException e) {
 				// TODO Auto-generated catch block

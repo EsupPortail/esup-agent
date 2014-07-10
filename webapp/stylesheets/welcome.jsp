@@ -3,13 +3,13 @@
 	locale="#{sessionController.locale}">
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['WELCOME.TITLE']}" />
-	
+
 
 	<e:messages />
 
 
-	
-	
+
+
 	<e:form id="welcomeForm"
 		rendered="#{sessionController.currentUser == null}">
 		<e:paragraph value="#{msgs['WELCOME.TEXT.UNAUTHENTICATED']}" />
@@ -32,7 +32,7 @@
 
 	<h:panelGroup rendered="#{sessionController.currentUser!=null}">
 
-		
+
 
 		<h:panelGroup>
 			<h:panelGrid border="0" columns="1" cellpadding="10" width="100%"
@@ -161,40 +161,43 @@
 			</h:dataTable>
 		</h:panelGroup>
 
+		<h:panelGroup
+			rendered="#{welcomeController.displayUser.agent.consulterDiplomes.taille!=0}">
+			<h:panelGrid border="0" columns="1" cellpadding="10" width="100%"
+				styleClass="esup-agent-portlet-subsection-header">
+				<h:outputText value="#{msgs['WELCOME.TITLE.DIPLOMES']}" />
+			</h:panelGrid>
 
-		<h:panelGrid border="0" columns="1" cellpadding="10" width="100%"
-			styleClass="esup-agent-portlet-subsection-header">
-			<h:outputText value="#{msgs['WELCOME.TITLE.DIPLOMES']}" />
-		</h:panelGrid>
-
-		<h:dataTable var="diplome"
-			value="#{welcomeController.displayUser.agent.consulterDiplomes.consultationDiplomesDto}"
-			columnClasses="list-column-center" headerClass="portlet-table-header"
+			<h:dataTable var="diplome"
+				value="#{welcomeController.displayUser.agent.consulterDiplomes.consultationDiplomesDto}"
+				columnClasses="list-column-center"
+				headerClass="portlet-table-header"
 				rowClasses="table-titre portlet-form-label" width="50%"
-			cellspacing="10" cellpadding="2">
+				cellspacing="10" cellpadding="2">
 
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Année" />
-				</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Année" />
+					</f:facet>
 
-				<h:outputText value="#{diplome.anneeDiplome+1900}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Diplôme" />
-				</f:facet>
+					<h:outputText value="#{diplome.anneeDiplome+1900}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Diplôme" />
+					</f:facet>
 
-				<h:outputText value="#{diplome.diplomeDto.libelleLong}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Lieu du diplôme" />
-				</f:facet>
+					<h:outputText value="#{diplome.diplomeDto.libelleLong}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Lieu du diplôme" />
+					</f:facet>
 
-				<h:outputText value="#{diplome.lieuDiplome}" />
-			</h:column>
-		</h:dataTable>
+					<h:outputText value="#{diplome.lieuDiplome}" />
+				</h:column>
+			</h:dataTable>
+		</h:panelGroup>
 
 	</h:panelGroup>
 
