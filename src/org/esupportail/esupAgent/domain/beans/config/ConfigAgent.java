@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.esupportail.commons.services.smtp.SmtpService;
 import org.esupportail.esupAgent.domain.DomainService;
+import org.esupportail.esupAgent.domain.beans.EnvoiMail;
 import org.esupportail.esupAgent.domain.beans.User;
 import org.springframework.beans.factory.InitializingBean;
 /**
@@ -25,12 +26,45 @@ public class ConfigAgent implements InitializingBean {
 	private String ldap_HarpegeId;
 	private DomainService domainService;
 	private boolean visualisationCompte;
+	private boolean telephonePortableModifiable;
+	private boolean emailModifiable;
+	private boolean adresseModifiable;
+	
+
 	private String contactHarpege;
+
 	private boolean wsdl_anonymous;
+
 	private String wsdl_usr_name;
 	private String wsdl_usr_password;
 	
 
+	
+	
+
+	public boolean getAdresseModifiable() {
+		return adresseModifiable;
+	}
+
+	public void setAdresseModifiable(boolean adresseModifiable) {
+		this.adresseModifiable = adresseModifiable;
+	}
+
+	public boolean getEmailModifiable() {
+		return emailModifiable;
+	}
+
+	public void setEmailModifiable(boolean emailModifiable) {
+		this.emailModifiable = emailModifiable;
+	}
+
+	public boolean getTelephonePortableModifiable() {
+		return telephonePortableModifiable;
+	}
+
+	public void setTelephonePortableModifiable(boolean telephonePortableModifiable) {
+		this.telephonePortableModifiable = telephonePortableModifiable;
+	}
 
 	/**
 	 * @return the wsdl_anonymous
@@ -101,6 +135,10 @@ public class ConfigAgent implements InitializingBean {
 	public void setVisualisationCompte(boolean visualisationCompte) {
 		this.visualisationCompte = visualisationCompte;
 	}
+	
+	
+	
+	
 
 	public void afterPropertiesSet() throws Exception {
 		 admins=new ArrayList<User>();
@@ -118,6 +156,9 @@ public class ConfigAgent implements InitializingBean {
 	public void setAdmins(List<User> admins) {
 		this.admins = admins;
 	}
+	
+	
+
 
 	public String getWsdl_url_referentiel_geographique() {
 		return wsdl_url_referentiel_geographique;

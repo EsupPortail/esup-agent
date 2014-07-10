@@ -3,42 +3,43 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-	<bean id="configAgent" class="org.esupportail.esupAgent.domain.beans.config.ConfigAgent">
+	<bean id="configAgent"
+		class="org.esupportail.esupAgent.domain.beans.config.ConfigAgent">
 		<description>Contient les éléments de configuration du canal
-			Agent</description>
-		<property name="domainService" ref="domainService"/>
-		
-		<property name="admins_string" 
-			value="${agent.admin}">
+			Agent
+		</description>
+		<property name="domainService" ref="domainService" />
+
+		<property name="admins_string" value="${agent.admin}">
 		</property>
-		<property name="wsdl_url_referentiel_geographique"
-			value="${wsdl.url_referentiel_geographique}">
+		<property name="wsdl_url_referentiel_geographique" value="${wsdl.url_referentiel_geographique}">
 		</property>
-		<property name="wsdl_url_referentiel_rh"
-			value="${wsdl.url_referentiel_rh}">
+		<property name="wsdl_url_referentiel_rh" value="${wsdl.url_referentiel_rh}">
 		</property>
-		<property name="wsdl_url_dossier_rh_personnel"
-			value="${wsdl.url_dossier_rh_personnel}">
+		<property name="wsdl_url_dossier_rh_personnel" value="${wsdl.url_dossier_rh_personnel}">
 		</property>
-		<property name="wsdl_url_dossier_rh_administratif"
-			value="${wsdl.url_dossier_rh_administratif}">
+		<property name="wsdl_url_dossier_rh_administratif" value="${wsdl.url_dossier_rh_administratif}">
 		</property>
-		<property name="ldap_HarpegeId"
-			value="${ldap.HarpegeId}" >
+		<property name="ldap_HarpegeId" value="${ldap.HarpegeId}">
 		</property>
-		<property name="visualisationCompte"
-			value="${agent.visualisationCompte}" >
-		</property>	
-		<property name="contactHarpege"
-			value="${agent.contactHarpege}" >
+		<property name="visualisationCompte" value="${agent.visualisationCompte}">
 		</property>
-		<property name="wsdl_anonymous"
-			value="${wsdl.anonymous}"></property>		
-		<property name="wsdl_usr_name"
-			value="${wsdl.usr_name}"></property>		
-		<property name="wsdl_usr_password"
-			value="${wsdl.usr_password}"></property>		
-				
+		<property name="contactHarpege" value="${agent.contactHarpege}">
+		</property>
+		<property name="wsdl_anonymous" value="${wsdl.anonymous}"></property>
+		<property name="wsdl_usr_name" value="${wsdl.usr_name}"></property>
+		<property name="wsdl_usr_password" value="${wsdl.usr_password}"></property>
+		<property name="telephonePortableModifiable" value="${agent.telephonePortableModifiable}"></property>
+		<property name="emailModifiable" value="${agent.emailModifiable}"></property>
+		<property name="adresseModifiable" value="${agent.adresseModifiable}"></property>
+
+
 	</bean>
+
+	<bean class="org.esupportail.esupAgent.domain.beans.EnvoiMail" id="envoiMail">
+	</bean>
+
+
+
 
 </beans>

@@ -4,6 +4,13 @@ div.esupAgent {
 	font-size: 12px;
 	padding-bottom: 14px;
 }
+div.esupAgent h1{
+	color: rgb(185, 158, 126);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 2em;
+	font-weight: bold;
+	border-bottom:1px solid #B99E7E;
+}
 
 div.esupAgent .portlet-menu {
 	background-image: url(images/banner_agent.png);
@@ -126,7 +133,9 @@ div.esupAgent esup-agent-entete {
 	padding-left: 28px;
 	text-align: center;
 	vertical-align: bottom;
-	font-size: 14px;
+	font-size: 1.0em;
+	font-weight: bold;
+	
 }
 
 div.esupAgent .selectedNode {

@@ -10,7 +10,13 @@ public class ContratSort implements Comparator<InformationsContratsDto>{
 		if (o1.getDateDernierAvenant()!=null && o2.getDateDernierAvenant()!=null){
 		return  (o1.getDateDernierAvenant().compareTo(o2.getDateDernierAvenant()));
 		}
-		return 1;
+		if (o1.getDateDernierAvenant()==null){
+			return 1;
+		}
+		if (o1.getDateDernierAvenant()==null){
+			return -1;
+		}
+		return 0;
 	}
 
 }

@@ -2,6 +2,7 @@ package org.esupportail.esupAgent.services.application;
 
 import org.esupportail.commons.services.application.SimpleApplicationServiceImpl;
 import org.esupportail.esupAgent.domain.DomainService;
+import org.esupportail.esupAgent.domain.beans.EnvoiMail;
 import org.esupportail.esupAgent.domain.beans.config.ConfigAgent;
 
 /**
@@ -12,7 +13,16 @@ public class AgentApplicationServiceImpl extends SimpleApplicationServiceImpl {
 	
 	ConfigAgent configAgent;
 	DomainService domainService;
+	EnvoiMail envoiMail;
 	
+	public EnvoiMail getEnvoiMail() {
+		return envoiMail;
+	}
+
+	public void setEnvoiMail(EnvoiMail envoiMail) {
+		this.envoiMail = envoiMail;
+	}
+
 	public AgentApplicationServiceImpl() {
 		super();
 	}
@@ -42,6 +52,8 @@ public class AgentApplicationServiceImpl extends SimpleApplicationServiceImpl {
 	public void setDomainService(DomainService domainService) {
 		this.domainService = domainService;
 	}
+
+
 	
 	
 }

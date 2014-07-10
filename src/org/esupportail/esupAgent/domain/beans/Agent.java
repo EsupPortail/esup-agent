@@ -2,6 +2,8 @@ package org.esupportail.esupAgent.domain.beans;
 
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesAvancement.DonneesAvancementDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesAvancement.DonneesAvancementReponseWSDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesPosition.DonneesPositionsDto_V3;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesPosition.DonneesPositionsReponseWSDto_V3;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesTableauAvancement.DonneesTableauxAvancementDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesTableauAvancement.DonneesTableauxAvancementReponseWSDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto;
@@ -19,7 +21,9 @@ import gouv.education.harpege.transverse.dto.DossierRhAdministratif.Consultation
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonneesPersonnelles.ConsultationCoordonneesPersonnellesDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonneesPersonnelles.ConsultationCoordonneesPersonnellesReponseWSDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonnneesBancaires.ConsultationCoordonneesBancairesDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonnneesBancaires.ConsultationCoordonneesBancairesDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonnneesBancaires.ConsultationCoordonneesBancairesReponseWSDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonnneesBancaires.ConsultationCoordonneesBancairesReponseWSDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationDiplomes.ConsultationDiplomesDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationDiplomes.ConsultationDiplomesReponseWSDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationInformationsEtatCivil.ConsultationEtatCivilResponseWSDto_V2;
@@ -27,6 +31,9 @@ import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituatio
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituationFamiliale.ConsultationSituationFamilialeReponseWSDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituationFamiliale.EnfantDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituationFamiliale.EnfantDto_V2;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ModificationAdressePersonnelle.AdressePersonnelleDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ModificationAdressePersonnelle.ModificationCoordonneesPersonnellesReponseWSDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ModificationCoordonneesPersonnelles.ModificationAdressePersonnelleReponseWSDto;
 import gouv.education.harpege.transverse.exception.HarpegeFonctionnelleException;
 import gouv.education.harpege.transverse.exception.HarpegeTechniqueException;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.DossierRhAdministratifSoapBindingStub;
@@ -51,6 +58,7 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.esupAgent.domain.beans.comparators.AvenantContratSort;
 import org.esupportail.esupAgent.domain.beans.comparators.ContratSort;
 import org.esupportail.esupAgent.domain.beans.comparators.DiplomeSort;
+import org.esupportail.esupAgent.domain.beans.comparators.ElementCarriereSort;
 import org.esupportail.esupAgent.domain.beans.comparators.EnfantSort;
 
 /**
@@ -58,24 +66,128 @@ import org.esupportail.esupAgent.domain.beans.comparators.EnfantSort;
  * 
  */
 public class Agent {
+
+	/**
+	 * identifiant de l'adresse
+	 */
+	private Integer identifiantAdresse;
+
+	/**
+	 * numéro de voie
+	 */
+	private String numeroVoie;
+
+	/**
+	 * bisTer
+	 */
+	private String bisTer;
+
+	/**
+	 * Code de la voie
+	 */
+	private String codeVoie;
+
+	/**
+	 * Libellé de la voie
+	 */
+	private String libelleVoie;
+
+	/**
+	 * nom de la voie
+	 */
+	private String nomVoie;
+
+	/**
+	 * habitant chez
+	 */
+	private String habitantChez;
+
+	/**
+	 * localite
+	 */
+	private String localite;
+
+	/**
+	 * code postal
+	 */
+	private String codePostal;
+
+	/**
+	 * ville
+	 */
+	private String ville;
+
+	/**
+	 * code pays
+	 */
+	private String codePays;
+
+	/**
+	 * libellé pays
+	 */
+	private String libellePays;
+
+	/**
+	 * code Postal étranger
+	 */
+	private String codePostalEtranger;
+
+	/**
+	 * téléphone domicile
+	 */
+	private String telephoneDomicile;
+
+	/**
+	 * numéro Fax
+	 */
+	private String numeroFax;
+
+	/**
+	 * témoin adresse principale
+	 */
+	private String temoinAdressePrincipale;
+
+	/**
+	 * téléphone portable
+	 */
+	private String telephonePortable;
+
+	/**
+	 * 
+	 */
+	private String email;
+
+	/**
+	 * témoin téléphone portable modifiable
+	 */
+	private boolean telephonePortableModifiable;
+	
+	/**
+	 * témoin email modifiable
+	 */
+	private boolean emailModifiable;
+	
+	/**
+	 * témoin adresse modifiable
+	 */	
+	private boolean adresseModifiable;
+
 	private boolean wsdl_anonymous;
 	private String wsdl_usr_name;
 	private String wsdl_usr_password;
 	private boolean visualisationCompte;
+	
 	private Integer supannEmpId;
 	private DossierRHAdministratif dossierRHAdministratif;
 	private DossierRhPersonnelWebServiceServiceLocator dossierRhPersonnelWebServiceServiceLocator;
 	private DossierRhAdministratifWebServiceServiceLocator dossierRhAdministratifWebServiceServiceLocator;
 	private String wsdl_url_dossier_rh_administratif;
 	private String wsdl_url_dossier_rh_personnel;
+	private String wsdl_url_referentiel_geographique;
 	private DossierRhPersonnelWebService dossierRhPersonnelWS;
 	private DossierRhPersonnelSoapBindingStub dossierRhPersonnelWSStub;
 	private ConsultationEtatCivilResponseWSDto_V2 consulterEtatCivil;
 	private ConsultationSituationFamilialeReponseWSDto_V2 consulterSituationFamiliale;
-
-	/**
-	 * A logger.
-	 */
 	private final Logger logger = new LoggerImpl(getClass());
 	private ConsultationSituationFamilialeDto_V2 consulterSituationFamilleDto;
 	private ConsultationCoordonneesPersonnellesDto[] consulterCoordonneesPersonnellesDto;
@@ -83,6 +195,35 @@ public class Agent {
 	private DossierRhAdministratifWebService dossierRhAdministratifWebService;
 	private DossierRhAdministratifSoapBindingStub dossierRhAdministratifWebServiceStub;
 	private ArrayList<AvenantContratDto> lstAvenantsContratDto;
+	private DonneesPositionsReponseWSDto_V3 consulterDonneesPosition;
+
+	
+	
+	
+	public boolean getAdresseModifiable() {
+		return adresseModifiable;
+	}
+
+	public void setAdresseModifiable(boolean adresseModifiable) {
+		this.adresseModifiable = adresseModifiable;
+	}
+
+	public boolean getEmailModifiable() {
+		return emailModifiable;
+	}
+
+	public void setEmailModifiable(boolean emailModifiable) {
+		this.emailModifiable = emailModifiable;
+	}
+
+	public boolean getTelephonePortableModifiable() {
+		return telephonePortableModifiable;
+	}
+
+	public void setTelephonePortableModifiable(
+			boolean telephonePortableModifiable) {
+		this.telephonePortableModifiable = telephonePortableModifiable;
+	}
 
 	/**
 	 * @return the wsdl_anonymous
@@ -137,6 +278,18 @@ public class Agent {
 			DossierRHAdministratif dossierRHAdministratif) {
 		this.dossierRHAdministratif = dossierRHAdministratif;
 	}
+	
+	
+	
+
+	public String getWsdl_url_referentiel_geographique() {
+		return wsdl_url_referentiel_geographique;
+	}
+
+	public void setWsdl_url_referentiel_geographique(
+			String wsdlUrlReferentielGeographique) {
+		wsdl_url_referentiel_geographique = wsdlUrlReferentielGeographique;
+	}
 
 	/**
 	 * @return the supannEmpId
@@ -154,7 +307,6 @@ public class Agent {
 	}
 
 	public ConsultationEtatCivilResponseWSDto_V2 getConsultationEtatCivil() {
-
 		if (consulterEtatCivil == null) {
 
 			dossierRhPersonnelWebServiceServiceLocator = new DossierRhPersonnelWebServiceServiceLocator();
@@ -164,17 +316,20 @@ public class Agent {
 
 			try {
 				if (wsdl_anonymous) {
+					logger.info("SUPANNEMPID : " + supannEmpId);
 					dossierRhPersonnelWS = dossierRhPersonnelWebServiceServiceLocator
 							.getdossierRhPersonnel();
 					consulterEtatCivil = dossierRhPersonnelWS
 							.consulterEtatCivil_V2(supannEmpId);
-				} else {					
+				} else {
+					logger.info("SUPANNEMPID : " + supannEmpId);
 					dossierRhPersonnelWSStub = (DossierRhPersonnelSoapBindingStub) dossierRhPersonnelWebServiceServiceLocator
 							.getdossierRhPersonnel();
 					dossierRhPersonnelWSStub.setUsername(wsdl_usr_name);
 					dossierRhPersonnelWSStub.setPassword(wsdl_usr_password);
 					consulterEtatCivil = dossierRhPersonnelWSStub
 							.consulterEtatCivil_V2(supannEmpId);
+
 				}
 
 			} catch (ServiceException e) {
@@ -190,9 +345,9 @@ public class Agent {
 				// TODO Auto-generated catch block
 				logger.info("erreur" + e.getMessage());
 			}
-			logger.info("Agent :: nom "
+			/*logger.info("Agent :: nom "
 					+ consulterEtatCivil.getIndividuReponseEtatCivil_V2()
-							.getNomPatronymique());
+							.getNomPatronymique());*/
 		}
 		return consulterEtatCivil;
 	}
@@ -250,16 +405,16 @@ public class Agent {
 		return consulterSituationFamilleDto;
 	}
 
-	public ConsultationCoordonneesBancairesDto[] getConsultationCoordonneesBancaires() {
-		ConsultationCoordonneesBancairesDto[] consultationCoordonneesBancairesDto = null;
+	public ConsultationCoordonneesBancairesDto_V2[] getConsultationCoordonneesBancaires() {
+		ConsultationCoordonneesBancairesDto_V2[] consultationCoordonneesBancairesDto = null;
 		try {
-			ConsultationCoordonneesBancairesReponseWSDto consulterCoordonneesBancaires;
+			ConsultationCoordonneesBancairesReponseWSDto_V2 consulterCoordonneesBancaires;
 			if (wsdl_anonymous) {
 				consulterCoordonneesBancaires = dossierRhPersonnelWS
-						.consulterCoordonneesBancaires(supannEmpId, "P");
+						.consulterCoordonneesBancaires_V2(supannEmpId, "P");
 			} else {
 				consulterCoordonneesBancaires = dossierRhPersonnelWSStub
-						.consulterCoordonneesBancaires(supannEmpId, "P");
+						.consulterCoordonneesBancaires_V2(supannEmpId, "P");
 			}
 			consultationCoordonneesBancairesDto = consulterCoordonneesBancaires
 					.getListeCoordonneesBancairesDto();
@@ -355,6 +510,61 @@ public class Agent {
 			consulterCoordonneesPersonnellesDto = consulterCoordonneesPersonnelles
 					.getListeCoordonneesPersonnelleDto();
 
+			/*
+			 * identifiantAdresse=consulterCoordonneesPersonnellesDto[0].getAdresseDto
+			 * ().getIdentifiantAdresse(); numeroVoie =
+			 * consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getNumeroVoie(); bisTer =
+			 * consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getBisTer();
+			 * codeVoie=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getVoie().getCodeVoie();
+			 * libelleVoie=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getVoie().getLibelleVoie();
+			 * nomVoie=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getNomVoie();
+			 * habitantChez=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getHabitantChez();
+			 * localite=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getLocalite();
+			 * codePostal=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getCodePostal();
+			 * ville=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getVille();
+			 * codePays=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getPays().getCodePays();
+			 * libellePays=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getPays().getLibellePays();
+			 * codePostalEtranger
+			 * =consulterCoordonneesPersonnellesDto[0].getAdresseDto
+			 * ().getCodePostalEtranger();
+			 * telephoneDomicile=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getTelephoneDomicile();
+			 * numeroFax=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getNumeroFax();
+			 * temoinAdressePrincipale=consulterCoordonneesPersonnellesDto
+			 * [0].getAdresseDto().getTemoinAdressePrincipale();
+			 * telephonePortable
+			 * =consulterCoordonneesPersonnellesDto[0].getTelephonePortable();
+			 * 
+			 * logger.info("identifiantAdresse : "+identifiantAdresse);
+			 * logger.info("numeroVoie :"+numeroVoie);
+			 * logger.info("bisTer :"+bisTer);
+			 * logger.info("codeVoie :"+codeVoie);
+			 * logger.info("libelleVoie :"+libelleVoie);
+			 * logger.info("nomVoie :"+nomVoie);
+			 * logger.info("habitantChez :"+habitantChez);
+			 * logger.info("localite :"+localite);
+			 * logger.info("codePostal :"+codePostal);
+			 * logger.info("ville :"+ville); logger.info("codePays :"+codePays);
+			 * logger.info("libellePays :"+libellePays);
+			 * logger.info("codePostalEtranger :"+codePostalEtranger);
+			 * logger.info("telephoneDomicile :"+telephoneDomicile);
+			 * logger.info("numeroFax :"+numeroFax);
+			 * logger.info("temoinAdressePrincipale :"+temoinAdressePrincipale);
+			 * logger.info("telephonePortable :"+telephonePortable);
+			 */
+
 			return consulterCoordonneesPersonnellesDto;
 		} catch (HarpegeTechniqueException ex) {
 			ex.printStackTrace();
@@ -392,16 +602,25 @@ public class Agent {
 								dateActuel);
 			}
 
-/*			CarriereDto_V2[] carriereDto_V2 = elementsCarriereReponseWSDto_V2
-					.getElementsCarriereFinalDto_V2().getElementsCarriereDto();
-			return (carriereDto_V2[0].getElementCarriereDto())[0]
-					.getIndiceDto().getIndiceNouveauMajore();*/
-			ElementCarriereFinalDto_V2 elementsCarriereFinalDto_V2 = elementsCarriereReponseWSDto_V2.getElementsCarriereFinalDto_V2();
-			if (elementsCarriereFinalDto_V2!=null){
-				CarriereDto_V2[] carriereDto_V2 = elementsCarriereFinalDto_V2.getElementsCarriereDto();
-				return (carriereDto_V2[carriereDto_V2.length-1].getElementCarriereDto())[carriereDto_V2[carriereDto_V2.length-1].getElementCarriereDto().length-1].getIndiceDto().getIndiceNouveauMajore();
+			ElementCarriereFinalDto_V2 elementsCarriereFinalDto_V2 = elementsCarriereReponseWSDto_V2
+					.getElementsCarriereFinalDto_V2();
+			if (elementsCarriereFinalDto_V2 != null) {
+				CarriereDto_V2[] carriereDto_V2 = elementsCarriereFinalDto_V2
+						.getElementsCarriereDto();
+				
+				CarriereDto_V2  elementCarriereFinalDto_V2 = carriereDto_V2[0]; 
+				ElementCarriereDto[] lstElementCarriereDto = elementCarriereFinalDto_V2.getElementCarriereDto();
+				Comparator<ElementCarriereDto> eltComparaison = new ElementCarriereSort();
+				Arrays.sort(lstElementCarriereDto, eltComparaison);
+				
+				logger.debug("indice : " + lstElementCarriereDto[lstElementCarriereDto.length-1].getIndiceDto().getIndiceNouveauMajore());
+				
+				//return (carriereDto_V2[carriereDto_V2.length - 1]
+				//		.getElementCarriereDto())[carriereDto_V2[carriereDto_V2.length - 1]
+				//		.getElementCarriereDto().length - 1].getIndiceDto()
+				//		.getIndiceNouveauMajore();
+				return lstElementCarriereDto[lstElementCarriereDto.length-1].getIndiceDto().getIndiceNouveauMajore();
 			}
-			
 
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
@@ -448,20 +667,20 @@ public class Agent {
 
 			for (DonneesAvancementDto da : donneesAvancementReponseWSDto
 					.getDonneesAvancementDto()) {
-				logger.info("Bonification échelon : "
+				logger.debug("Bonification échelon : "
 						+ da.getBonificationEchelon());
-				logger.info("Echelon : "
+				logger.debug("Echelon : "
 						+ da.getEchelonFuturDto().getCodeEchelonFutur());
-				logger.info("Libellé échelon"
+				logger.debug("Libellé échelon"
 						+ da.getEchelonFuturDto().getLibelleEchelonFutur());
-				logger.info("INM : " + da.getIndiceMajoreFutur());
+				logger.debug("INM : " + da.getIndiceMajoreFutur());
 
-				logger.info("Indice brut : " + da.getIndiceBrutFutur());
+				logger.debug("Indice brut : " + da.getIndiceBrutFutur());
 				if (da.getDatePrevisionnelle() != null) {
-					logger.info("Date prévisionnelle : "
+					logger.debug("Date prévisionnelle : "
 							+ sdf.format(da.getDatePrevisionnelle().getTime()));
 				}
-				logger.info(da.getBonificationEchelon());
+				logger.debug(da.getBonificationEchelon());
 
 			}
 
@@ -501,8 +720,8 @@ public class Agent {
 						.consulterDiplomes(supannEmpId);
 			}
 
-			logger.info("consulterDiplomes " + consulterDiplomes.toString());
-			logger.info("consulterDiplomes " + consulterDiplomes.getTaille());
+			logger.debug("consulterDiplomes " + consulterDiplomes.toString());
+			logger.debug("consulterDiplomes " + consulterDiplomes.getTaille());
 			if (consulterDiplomes.getTaille() != 0) {
 				Comparator<ConsultationDiplomesDto> eltComparaison = new DiplomeSort();
 				Arrays.sort(consulterDiplomes.getConsultationDiplomesDto(),
@@ -557,9 +776,9 @@ public class Agent {
 				lstCarriereDto_V2 = elementsCarriereReponseWSDto_V2
 						.getElementsCarriereFinalDto_V2()
 						.getElementsCarriereDto();
-				logger.info(Integer.toString(lstCarriereDto_V2.length));
+				logger.debug(Integer.toString(lstCarriereDto_V2.length));
 			} else {
-				logger.info(supannEmpId + " : aucun élément de carrière");
+				logger.debug(supannEmpId + " : aucun élément de carrière");
 			}
 			return lstCarriereDto_V2;
 		} catch (ServiceException e) {
@@ -606,7 +825,6 @@ public class Agent {
 							.consulterInformationsContrats(supannEmpId, null);
 				}
 
-
 				lstContrats = informationsContratsReponseWSDto
 						.getInformationsContratsDto();
 
@@ -639,7 +857,7 @@ public class Agent {
 
 		InformationsContratsReponseWSDto informationsContratsReponseWSDto;
 
-		logger.info(wsdl_url_dossier_rh_administratif);
+		
 		if (lstAvenantsContratDto == null) {
 			lstAvenantsContratDto = new ArrayList<AvenantContratDto>();
 		}
@@ -676,7 +894,7 @@ public class Agent {
 							.getAvenantContratDto();
 					for (int j = 0; j < avenantContratDto.length; j++) {
 						// lstAvenantsContratDto.add(avenantContratDto[j]);
-						logger.info(sdf.format(avenantContratDto[j]
+						logger.debug(sdf.format(avenantContratDto[j]
 								.getDateDebutContrat().getTime()));
 					}
 				}
@@ -723,6 +941,8 @@ public class Agent {
 		this.visualisationCompte = visualisationCompte;
 	}
 
+
+
 	public InformationsOccupationAffectationDto[] getOccupationAffectation(
 			String numeroContrat, Calendar date) {
 		try {
@@ -759,4 +979,310 @@ public class Agent {
 		return null;
 	}
 
+	/*
+	 * 
+	 */
+	public Integer getIdentifiantAdresse() {
+		return identifiantAdresse;
+	}
+
+	public void setIdentifiantAdresse(Integer identifiantAdresse) {
+		this.identifiantAdresse = identifiantAdresse;
+	}
+
+	public String getNumeroVoie() {
+		return numeroVoie;
+	}
+
+	public void setNumeroVoie(String numeroVoie) {
+		this.numeroVoie = numeroVoie;
+	}
+
+	public String getBisTer() {
+		return bisTer;
+	}
+
+	public void setBisTer(String bisTer) {
+		this.bisTer = bisTer;
+	}
+
+	public String getCodeVoie() {
+		return codeVoie;
+	}
+
+	public void setCodeVoie(String codeVoie) {
+		this.codeVoie = codeVoie;
+	}
+
+	public String getLibelleVoie() {
+		return libelleVoie;
+	}
+
+	public void setLibelleVoie(String libelleVoie) {
+		this.libelleVoie = libelleVoie;
+	}
+
+	public String getNomVoie() {
+		return nomVoie;
+	}
+
+	public void setNomVoie(String nomVoie) {
+		this.nomVoie = nomVoie;
+	}
+
+	public String getHabitantChez() {
+		return habitantChez;
+	}
+
+	public void setHabitantChez(String habitantChez) {
+		this.habitantChez = habitantChez;
+	}
+
+	public String getLocalite() {
+		return localite;
+	}
+
+	public void setLocalite(String localite) {
+		this.localite = localite;
+	}
+
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public String getCodePays() {
+		return codePays;
+	}
+
+	public void setCodePays(String codePays) {
+		this.codePays = codePays;
+	}
+
+	public String getLibellePays() {
+		return libellePays;
+	}
+
+	public void setLibellePays(String libellePays) {
+		this.libellePays = libellePays;
+	}
+
+	public String getCodePostalEtranger() {
+		return codePostalEtranger;
+	}
+
+	public void setCodePostalEtranger(String codePostalEtranger) {
+		this.codePostalEtranger = codePostalEtranger;
+	}
+
+	public String getTelephoneDomicile() {
+		return telephoneDomicile;
+	}
+
+	public void setTelephoneDomicile(String telephoneDomicile) {
+		this.telephoneDomicile = telephoneDomicile;
+	}
+
+	public String getNumeroFax() {
+		return numeroFax;
+	}
+
+	public void setNumeroFax(String numeroFax) {
+		this.numeroFax = numeroFax;
+	}
+
+	public String getTemoinAdressePrincipale() {
+		return temoinAdressePrincipale;
+	}
+
+	public void setTemoinAdressePrincipale(String temoinAdressePrincipale) {
+		this.temoinAdressePrincipale = temoinAdressePrincipale;
+	}
+
+	public String getTelephonePortable() {
+		return telephonePortable;
+	}
+
+	public void setTelephonePortable(String telephonePortable) {
+		this.telephonePortable = telephonePortable;
+	}
+
+	/**
+	 * Recupere les donnes des differentes positions de l'agent avec une date de
+	 * debut, de fin et un motif Activite, conge parental, detachement, etc...
+	 * 
+	 * @return the consulterDonneesPosition
+	 */
+	public DonneesPositionsDto_V3[] getConsulterDonneesPosition() {
+
+		try {
+			dossierRhAdministratifWebServiceServiceLocator = new DossierRhAdministratifWebServiceServiceLocator();
+			dossierRhAdministratifWebServiceServiceLocator
+					.setdossierRhAdministratifEndpointAddress(wsdl_url_dossier_rh_administratif);
+
+			try {
+
+				if (wsdl_anonymous) {
+					dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
+							.getdossierRhAdministratif();
+					consulterDonneesPosition = dossierRhAdministratifWebService
+							.consulterDonneesPositions_V3(supannEmpId, null);
+				} else {
+					dossierRhAdministratifWebServiceStub = (DossierRhAdministratifSoapBindingStub) dossierRhAdministratifWebServiceServiceLocator
+							.getdossierRhAdministratif();
+					dossierRhAdministratifWebServiceStub
+							.setUsername(wsdl_usr_name);
+					dossierRhAdministratifWebServiceStub
+							.setPassword(wsdl_usr_password);
+					consulterDonneesPosition = dossierRhAdministratifWebServiceStub
+							.consulterDonneesPositions_V3(supannEmpId, null);
+					//logger.info(consulterDonneesPosition
+					//		.getDonneesPositionsDto_V3()[0].getPositionDto()
+					//		.getLibellePosition());
+				}
+
+				DonneesPositionsDto_V3[] donneesPositionsDto_V3 = consulterDonneesPosition
+						.getDonneesPositionsDto_V3();
+
+				return donneesPositionsDto_V3;
+			} catch (HarpegeTechniqueException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (HarpegeFonctionnelleException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param consulterDonneesPosition
+	 *            the consulterDonneesPosition to set
+	 */
+	public void setConsulterDonneesPosition(
+			DonneesPositionsReponseWSDto_V3 consulterDonneesPosition) {
+		this.consulterDonneesPosition = consulterDonneesPosition;
+	}
+
+
+	public void modifierCoordonneesPersonnelles(String telephonePortable,String email) {		
+		if (telephonePortable != null || email != null) {
+			ModificationCoordonneesPersonnellesReponseWSDto modificationCoordonneesPersonnellesReponse = new ModificationCoordonneesPersonnellesReponseWSDto();
+			DossierRhPersonnelWebServiceServiceLocator dossierRHPersonnelWSServiceLocator = new DossierRhPersonnelWebServiceServiceLocator();
+			dossierRHPersonnelWSServiceLocator
+					.setdossierRhPersonnelEndpointAddress(wsdl_url_dossier_rh_personnel);
+			try {
+				if (wsdl_anonymous) {
+
+					dossierRhPersonnelWSStub = 
+						(DossierRhPersonnelSoapBindingStub) dossierRHPersonnelWSServiceLocator.getdossierRhPersonnel();
+					dossierRhPersonnelWSStub.setUsername("");
+					dossierRhPersonnelWSStub.setPassword("");
+					try {
+						modificationCoordonneesPersonnellesReponse = dossierRhPersonnelWS
+								.modiferCoordonneesPersonnelles(supannEmpId,
+										email, telephonePortable);
+					} catch (HarpegeTechniqueException e) {
+						// TODO Auto-generated catch block
+						logger.info("erreur technique");
+						e.printStackTrace();
+					} catch (HarpegeFonctionnelleException e) {
+						logger.info("erreur fonctionnelle");
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RemoteException e) {
+						logger.info("erreur remote");
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+
+					dossierRhPersonnelWSStub = (DossierRhPersonnelSoapBindingStub) dossierRhPersonnelWebServiceServiceLocator
+							.getdossierRhPersonnel();
+					dossierRhPersonnelWSStub.setUsername(wsdl_usr_name);
+					dossierRhPersonnelWSStub.setPassword(wsdl_usr_password);
+					logger.debug("supanneempid : " + supannEmpId);
+					logger.debug("telephone : " + telephonePortable);
+					try {
+						modificationCoordonneesPersonnellesReponse = dossierRhPersonnelWSStub
+								.modiferCoordonneesPersonnelles(supannEmpId,
+										email, telephonePortable);
+					} catch (HarpegeTechniqueException e) {
+						// TODO Auto-generated catch block
+						logger.info("erreur technique");
+						e.printStackTrace();
+					} catch (HarpegeFonctionnelleException e) {
+						logger.info("erreur fonctionnelle");
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RemoteException e) {
+						logger.info("erreur remote");
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+	
+	public void modifierAdressePersonnelle(AdressePersonnelleDto adressePersonnelleDto){
+		if (adressePersonnelleDto!=null){
+			DossierRhPersonnelWebServiceServiceLocator dossierRHPersonnelWSServiceLocator = new DossierRhPersonnelWebServiceServiceLocator();
+			dossierRHPersonnelWSServiceLocator
+					.setdossierRhPersonnelEndpointAddress(wsdl_url_dossier_rh_personnel);
+			try {
+				dossierRhPersonnelWSStub = 
+					(DossierRhPersonnelSoapBindingStub) dossierRHPersonnelWSServiceLocator.getdossierRhPersonnel();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (!wsdl_anonymous) {
+				dossierRhPersonnelWSStub.setUsername(wsdl_usr_name);
+				dossierRhPersonnelWSStub.setPassword(wsdl_usr_password);
+			}
+			ModificationAdressePersonnelleReponseWSDto adressePersonnelleReponse = new ModificationAdressePersonnelleReponseWSDto();
+			
+				try {
+					adressePersonnelleReponse = dossierRhPersonnelWSStub.modifierAdressePersonnelle(adressePersonnelleDto);
+				} catch (HarpegeTechniqueException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (HarpegeFonctionnelleException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
+		}
+		
+	}
+	
 }

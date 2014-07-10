@@ -16,7 +16,7 @@ public class CarriereDtoNode extends TreeNodeBase {
 	private static final long serialVersionUID = -4283600481443073346L;
 
 	public CarriereDtoNode(CarriereDto_V2 carriereDto) {
-		super(NODE_TYPE, "carri\u00E8re " + carriereDto.getNumeroSeqCarriere() ,false);		
+		super(NODE_TYPE, "carri\u00E8re " + carriereDto.getNumeroSeqCarriere() + " : " + carriereDto.getTypePopulationDto().getLibelleCourtTypePopulation(),false);		
 		this.carriereDto = carriereDto;
 	}
 

@@ -26,7 +26,8 @@ public class ElementCarriereDtoNode extends TreeNodeBase {
 			CarriereDto_V2 carriereDto_V2) {
 		super();
 		super.setType(NODE_TYPE);
-		super.setDescription("El\u00E9ment n\u00B0" + elementCarriereDto.getNumeroSequenceElement() + " ("+sdf.format(elementCarriereDto.getDateEffetElementsCarriere().getTime())+")");
+		//super.setDescription("El\u00E9ment n\u00B0" + elementCarriereDto.getNumeroSequenceElement() + " ("+sdf.format(elementCarriereDto.getDateEffetElementsCarriere().getTime())+")" + " : " + elementCarriereDto.getCorpsDto().getLibelleCorps());
+		super.setDescription(elementCarriereDto.getCorpsDto().getLibelleCorps() + " ("+sdf.format(elementCarriereDto.getDateEffetElementsCarriere().getTime())+")");
 		super.setLeaf(false);
 		this.elementCarriereDto = elementCarriereDto;
 		this.carriereDto = carriereDto_V2;

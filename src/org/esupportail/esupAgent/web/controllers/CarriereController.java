@@ -2,7 +2,12 @@ package org.esupportail.esupAgent.web.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Comparator;
+
+import javax.faces.component.UIComponent;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ActionEvent;
 
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.BapReferensDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.BapReferensDto_V2;
@@ -12,6 +17,7 @@ import gouv.education.harpege.transverse.dto.DossierRhAdministratif.Consultation
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.AffectationRechercheDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.InformationsOccupationAffectationDto;
 
+import org.apache.myfaces.custom.tree2.HtmlTree;
 import org.apache.myfaces.custom.tree2.TreeModelBase;
 import org.apache.myfaces.custom.tree2.TreeNode;
 import org.apache.myfaces.custom.tree2.TreeNodeBase;
@@ -39,7 +45,17 @@ public class CarriereController extends AbstractContextAwareController {
 
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-	private InformationsOccupationAffectationDto[] currentInformationsOccupationAffectationDto=null;
+	private InformationsOccupationAffectationDto[] currentInformationsOccupationAffectationDto = null;
+
+	private String selectedNodeId;
+
+	public String getSelectedNodeId() {
+		return selectedNodeId;
+	}
+
+	public void setSelectedNodeId(String selectedNodeId) {
+		this.selectedNodeId = selectedNodeId;
+	}
 
 	public CarriereController() {
 		super();
@@ -89,7 +105,7 @@ public class CarriereController extends AbstractContextAwareController {
 		if (getDisplayUser().getAgent().getConsulterCarriere() != null) {
 
 			logger
-					.info("Nombre de séquence carrière : "
+					.debug("Nombre de séquence carrière : "
 							+ getDisplayUser().getAgent()
 									.getConsulterCarriere().length);
 			if (getDisplayUser().getAgent().getConsulterCarriere().length == 1) {
@@ -99,21 +115,29 @@ public class CarriereController extends AbstractContextAwareController {
 
 			for (CarriereDto_V2 carriereDto : getDisplayUser().getAgent()
 					.getConsulterCarriere()) {
+				logger.debug("TYPE POPULATION "
+						+ carriereDto.getTypePopulationDto()
+								.getTemoinEnseignant());
 				treeNodeBase = new CarriereDtoNode(carriereDto);
 				lstElementCarriereDto = carriereDto.getElementCarriereDto();
 				Arrays.sort(lstElementCarriereDto, eltComparaison);
 
 				for (ElementCarriereDto elementCarriereDto : lstElementCarriereDto) {
-					treeNodeBase.getChildren().add(
-							new ElementCarriereDtoNode(elementCarriereDto,
-									carriereDto));
-					logger.info("numéro séquence "
-							+ carriereDto.getNumeroSeqCarriere().toString());
-					logger.info(elementCarriereDto.getNumeroSequenceElement()
-							.toString());
-					logger.info("Date effet "
-							+ sdf.format(carriereDto.getDateDebutCarriere()
-									.getTime()));
+					if (elementCarriereDto.getDateEffetElementsCarriere()
+							.before(Calendar.getInstance())) {
+						treeNodeBase.getChildren().add(
+								new ElementCarriereDtoNode(elementCarriereDto,
+										carriereDto));
+						logger
+								.debug("numéro séquence "
+										+ carriereDto.getNumeroSeqCarriere()
+												.toString());
+						logger.debug(elementCarriereDto
+								.getNumeroSequenceElement().toString());
+						logger.debug("Date effet "
+								+ sdf.format(carriereDto.getDateDebutCarriere()
+										.getTime()));
+					}
 
 				}
 				rootNode.getChildren().add(treeNodeBase);
@@ -123,12 +147,11 @@ public class CarriereController extends AbstractContextAwareController {
 			this.carriereTree = new TreeModelBase(rootNode);
 			String[] expandPaths = this.carriereTree.getPathInformation("0:0");
 			this.carriereTree.getTreeState().expandPath(expandPaths);
-			
+
 		} else {
 			this.carriereTree = null;
 		}
-		
-		
+
 		return "navigationCarriere";
 	}
 
@@ -166,8 +189,9 @@ public class CarriereController extends AbstractContextAwareController {
 	 * @return the currentElementCarriereDto
 	 */
 	public ElementCarriereDto getCurrentElementCarriereDto() {
-		//logger.info(currentElementCarriereDto.getCorpsDto().getCodeCorps());
-		//logger.info(currentCarriereDto.getTypePopulationDto().getLibelleLongTypePopulation());
+		// logger.info(currentElementCarriereDto.getCorpsDto().getCodeCorps());
+		// logger.info(currentCarriereDto.getTypePopulationDto().getLibelleLongTypePopulation());
+		
 		return currentElementCarriereDto;
 	}
 
@@ -184,19 +208,26 @@ public class CarriereController extends AbstractContextAwareController {
 	 * @return the currentInformationsOccupationAffectationDto
 	 */
 	public InformationsOccupationAffectationDto[] getCurrentInformationsOccupationAffectationDto() {
-/*		if (currentInformationsOccupationAffectationDto!=null){
-			for (int i=0;i<currentInformationsOccupationAffectationDto.length;i++){
-				InformationsOccupationAffectationDto info=currentInformationsOccupationAffectationDto[i];
-				AffectationRechercheDto[]  affectationRechercheDto=info.getAffectationRechercheDto();
-				if (affectationRechercheDto!=null){
-					for (int k=0;k<affectationRechercheDto.length;k++){
-						System.out.println("affectation : " + affectationRechercheDto[k].getNumeroSequenceAffectationRecherche() + " - " + affectationRechercheDto[k].getStructureAffectationRechercheDto().getCodeStructureAffectationRecherche()+"-" +affectationRechercheDto[k].getStructureAffectationRechercheDto().getLibelleCourtStructureAffectationRecherche()+"-" + affectationRechercheDto[k].getStructureAffectationRechercheDto().getLibelleLongStructureAffectationRecherche());
-					}
-				} else{
-					System.out.println("Pas d'affectation recherche");
-				}
-			}
-		}*/
+		/*
+		 * if (currentInformationsOccupationAffectationDto!=null){ for (int
+		 * i=0;i<currentInformationsOccupationAffectationDto.length;i++){
+		 * InformationsOccupationAffectationDto
+		 * info=currentInformationsOccupationAffectationDto[i];
+		 * AffectationRechercheDto[]
+		 * affectationRechercheDto=info.getAffectationRechercheDto(); if
+		 * (affectationRechercheDto!=null){ for (int
+		 * k=0;k<affectationRechercheDto.length;k++){
+		 * System.out.println("affectation : " +
+		 * affectationRechercheDto[k].getNumeroSequenceAffectationRecherche() +
+		 * " - " +
+		 * affectationRechercheDto[k].getStructureAffectationRechercheDto
+		 * ().getCodeStructureAffectationRecherche()+"-"
+		 * +affectationRechercheDto[k].getStructureAffectationRechercheDto().
+		 * getLibelleCourtStructureAffectationRecherche()+"-" +
+		 * affectationRechercheDto[k].getStructureAffectationRechercheDto().
+		 * getLibelleLongStructureAffectationRecherche()); } } else{
+		 * System.out.println("Pas d'affectation recherche"); } } }
+		 */
 		return currentInformationsOccupationAffectationDto;
 	}
 
@@ -205,7 +236,7 @@ public class CarriereController extends AbstractContextAwareController {
 	 *            the currentInformationsOccupationAffectationDto to set
 	 */
 	public void setCurrentInformationsOccupationAffectationDto(
-			InformationsOccupationAffectationDto[] currentInformationsOccupationAffectationDto) {		
+			InformationsOccupationAffectationDto[] currentInformationsOccupationAffectationDto) {
 		this.currentInformationsOccupationAffectationDto = currentInformationsOccupationAffectationDto;
 	}
 
@@ -224,21 +255,13 @@ public class CarriereController extends AbstractContextAwareController {
 
 	public String updateCurrentElementCarriereDto() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		/*
-		 * for (BapReferensDto_V2 lst:currentCarriereDto.getBapReferensDto()){
-		 * logger.info(sdf.format(lst.getDateDebut().getTime())+" : "+lst.
-		 * getCodeBAPReferens()); }
-		 */
-		// logger.info(currentCarriereDto.get.getBapReferensDto()[0].getCodeBAPReferens());
-		// logger.info(currentCarriereDto.getBapReferensDto()[0].getLibelleLongBAPReferens());
-		// logger.info(currentCarriereDto.getCategorieFonctionPubliqueDto().getCodeCategorieFonctionPublique());
+
 		currentInformationsOccupationAffectationDto = getDisplayUser()
 				.getAgent().getOccupationAffectation(
 						String.valueOf(currentCarriereDto
 								.getNumeroSeqCarriere()),
 						currentElementCarriereDto
 								.getDateEffetElementsCarriere());
-
 		return "navigationCarriere";
 	}
 
@@ -247,4 +270,18 @@ public class CarriereController extends AbstractContextAwareController {
 		currentElementCarriereDto = null;
 		currentInformationsOccupationAffectationDto = null;
 	}
+
+	public void processAction(ActionEvent event)
+			throws AbortProcessingException {
+		UIComponent component = (UIComponent) event.getSource();
+		while (!(component != null && component instanceof HtmlTree)) {
+			component = component.getParent();
+		}
+		if (component != null) {
+			HtmlTree tree = (HtmlTree) component;
+			TreeNodeBase node = (TreeNodeBase) tree.getNode();
+			tree.setNodeSelected(event);
+		}
+	}
+
 }

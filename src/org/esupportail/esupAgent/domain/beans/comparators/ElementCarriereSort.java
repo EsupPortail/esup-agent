@@ -8,7 +8,7 @@ public class ElementCarriereSort implements Comparator<ElementCarriereDto> {
 
 	public int compare(ElementCarriereDto o1, ElementCarriereDto o2) {
 		if (o1.getDateEffetElementsCarriere().equals(o2.getDateEffetElementsCarriere())) {
-			if (o1.getIndiceDto().getIndiceNouveauMajore() != null) {
+			if (o1.getIndiceDto().getIndiceNouveauMajore() != null && o2.getIndiceDto().getIndiceNouveauMajore() != null) {
 				return (new Integer(o1.getIndiceDto().getIndiceNouveauMajore())
 						.compareTo(new Integer(o2.getIndiceDto()
 								.getIndiceNouveauMajore())));

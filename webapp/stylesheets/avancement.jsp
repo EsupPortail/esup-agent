@@ -2,13 +2,14 @@
 <e:page stringsVar="msgs" menuItem="about"
 	locale="#{sessionController.locale}"
 	authorized="#{aboutController.pageAuthorized}">
-<t:div styleClass="esupAgent">	<%@include file="_navigation.jsp"%>
+	<t:div styleClass="esupAgent">
+		<%@include file="_navigation.jsp"%>
 
-	<e:section value="#{msgs['AVANCEMENT.TITLE']}">
-		<f:param value="#{applicationService.name}" />
-		<f:param value="#{applicationService.version}" />
-	</e:section>
-	
+		<e:section value="#{msgs['AVANCEMENT.TITLE']}">
+			<f:param value="#{applicationService.name}" />
+			<f:param value="#{applicationService.version}" />
+		</e:section>
+
 		<h:panelGroup rendered="#{sessionController.currentUser != null}">
 
 			<t:div styleClass="esup-agent-portlet-display-block"
@@ -36,7 +37,13 @@
 					<f:facet name="header">
 						<h:outputText value="#{msgs['AVANCEMENT.TEXT.INM']}" />
 					</f:facet>
-					<h:outputText value="#{avancement.indiceMajoreFutur}" />
+					<h:panelGroup>
+						<h:outputText value="#{avancement.indiceMajoreFutur} "
+							rendered="#{avancement.indiceMajoreFutur!=null}" />
+						<h:outputText
+							value="#{avancement.echelonFuturDto.libelleEchelonFutur}"
+							rendered="#{avancement.echelonFuturDto.libelleEchelonFutur!=null}" />
+					</h:panelGroup>
 				</h:column>
 				<h:column>
 					<f:facet name="header">

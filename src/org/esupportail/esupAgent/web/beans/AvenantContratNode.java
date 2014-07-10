@@ -36,7 +36,15 @@ public class AvenantContratNode extends TreeNodeBase {
 			InformationsContratsDto informationsContratsDto) {
 		super();
 		super.setType(NODE_TYPE);
-		if (avenantContratDto.getDateFinContrat() != null) {
+		if (avenantContratDto.getDateFinExecutionContrat() != null) {
+			super.setDescription("du "
+					+ sdf.format(avenantContratDto.getDateDebutContrat()
+							.getTime())
+					+ " au "
+					+ sdf.format(avenantContratDto.getDateFinExecutionContrat()
+							.getTime())
+					);
+		} else if (avenantContratDto.getDateFinContrat() != null) {
 			super.setDescription("du "
 					+ sdf.format(avenantContratDto.getDateDebutContrat()
 							.getTime())

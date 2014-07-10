@@ -8,16 +8,23 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import javax.faces.component.UIComponent;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ActionEvent;
+
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.InformationsContratsDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.AffectationDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.InformationsOccupationAffectationDto;
 
+import org.apache.myfaces.custom.tree2.HtmlTree;
 import org.apache.myfaces.custom.tree2.TreeModelBase;
 import org.apache.myfaces.custom.tree2.TreeNode;
 import org.apache.myfaces.custom.tree2.TreeNodeBase;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.esupAgent.domain.beans.User;
+import org.esupportail.esupAgent.domain.beans.comparators.AffectationSort;
 import org.esupportail.esupAgent.domain.beans.comparators.AvenantContratSort;
 import org.esupportail.esupAgent.web.beans.AvenantContratNode;
 import org.esupportail.esupAgent.web.beans.InformationsContratsNode;
@@ -98,7 +105,7 @@ public class ContratController extends AbstractContextAwareController {
 			addUnauthorizedActionMessage();
 			return null;
 		}
-		currentAvenantContratDto=null;
+		currentAvenantContratDto = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		TreeNode rootNode = new TreeNodeBase("root", "", "root", false);
 		TreeNodeBase treeNodeBase;
@@ -144,10 +151,16 @@ public class ContratController extends AbstractContextAwareController {
 	}
 
 	public String updateCurrentAvenantContratDto() {
+		Comparator<AffectationDto> eltComparaison = new AffectationSort();
 		currentInformationsOccupationAffectationDto = getDisplayUser()
 				.getAgent().getOccupationAffectation(
-						currentContratDto.getNumeroContrat(),
-						currentAvenantContratDto.getDateDebutContrat());
+						currentContratDto.getNumeroContrat(), null);
+
+		if (currentInformationsOccupationAffectationDto != null) {
+			for (InformationsOccupationAffectationDto occ : currentInformationsOccupationAffectationDto) {
+				Arrays.sort(occ.getAffectationDto(), eltComparaison);
+			}
+		}
 		return "navigationContrat";
 	}
 
@@ -199,5 +212,18 @@ public class ContratController extends AbstractContextAwareController {
 		currentAvenantContratDto = null;
 		currentContratDto = null;
 		currentInformationsOccupationAffectationDto = null;
+	}
+
+	public void processAction(ActionEvent event)
+			throws AbortProcessingException {
+		UIComponent component = (UIComponent) event.getSource();
+		while (!(component != null && component instanceof HtmlTree)) {
+			component = component.getParent();
+		}
+		if (component != null) {
+			HtmlTree tree = (HtmlTree) component;
+			TreeNodeBase node = (TreeNodeBase) tree.getNode();
+			tree.setNodeSelected(event);
+		}
 	}
 }

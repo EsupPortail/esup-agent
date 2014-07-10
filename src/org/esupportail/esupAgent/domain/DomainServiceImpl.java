@@ -125,63 +125,64 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 			user.setAdmin(true);
 		}
 
-		logger.info("in setUserInfo method");
-logger.info(((AgentApplicationServiceImpl) getApplicationService())
-				.getConfigAgent().getLdap_HarpegeId());
+		
+
 		String supannEmpId = ldapUser.getAttribute(((AgentApplicationServiceImpl) getApplicationService())
 				.getConfigAgent().getLdap_HarpegeId());
 
-		logger.info("supannEmpId : " + supannEmpId);
+		logger.debug("supannEmpId : " + supannEmpId);
 
 		currentAgent.setSupannEmpId(new Integer(supannEmpId).intValue());
 		currentAgent.setVisualisationCompte(((AgentApplicationServiceImpl) getApplicationService())
 				.getConfigAgent().getVisualisationCompte());
-	
-		
-		
+		currentAgent.setTelephonePortableModifiable(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getTelephonePortableModifiable());
+		currentAgent.setEmailModifiable(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getEmailModifiable());
+		currentAgent.setAdresseModifiable(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getAdresseModifiable());
 		currentAgent.setWsdl_anonymous(((AgentApplicationServiceImpl) getApplicationService())
 				.getConfigAgent().getWsdl_anonymous());
 		currentAgent.setWsdl_usr_name(((AgentApplicationServiceImpl) getApplicationService())
 				.getConfigAgent().getWsdl_usr_name());
 		currentAgent.setWsdl_usr_password(((AgentApplicationServiceImpl) getApplicationService())
 				.getConfigAgent().getWsdl_usr_password());
-
-		
+		currentAgent.setWsdl_url_referentiel_geographique(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getWsdl_url_referentiel_geographique());
 		
 		currentAgent
 				.setWsdl_url_dossier_rh_personnel(((AgentApplicationServiceImpl) getApplicationService())
 						.getConfigAgent().getWsdl_url_dossier_rh_personnel());
 		currentAgent.setWsdl_url_dossier_rh_administratif(((AgentApplicationServiceImpl) getApplicationService())
 						.getConfigAgent().getWsdl_url_dossier_rh_administratif());
-
 		try {
 			if (currentAgent.getConsultationEtatCivil() == null) {
-				logger.info("erreur consultation civil");
+				logger.error("erreur consultation civil");
 
 			} else if (currentAgent.getConsultationEtatCivil()
 					.getIndividuReponseEtatCivil_V2() == null) {
-				logger.info(currentAgent.getConsultationEtatCivil().toString());
-				logger.info("erreur dans getNomPatronymique()");
+				logger.error(currentAgent.getConsultationEtatCivil().toString());
+				logger.error("erreur dans getNomPatronymique()");
 			} else {
-				logger.info("nom : "
+				logger.debug("nom : "
 						+ currentAgent.getConsultationEtatCivil()
 								.getIndividuReponseEtatCivil_V2()
 								.getNomPatronymique());
-				logger.info("prenom : "
+				logger.debug("prenom : "
 						+ currentAgent.getConsultationEtatCivil()
 								.getIndividuReponseEtatCivil_V2().getPrenom());
-				logger.info("prenom : "
+				logger.debug("civilite : "
 						+ currentAgent.getConsultationEtatCivil()
 								.getIndividuReponseEtatCivil_V2().getCivilite());
 			}
 		} catch (Exception e) {
-			logger.info("erreur" + e.getMessage());
+			logger.error("erreur" + e.getMessage());
 		}
 
 		try {
 			user.setAgent(currentAgent);
 		} catch (Exception e) {
-			logger.info("stockage des informations de l'utilisateur impossible !");
+			logger.error("stockage des informations de l'utilisateur impossible !");
 		}
 		return true;
 	}
