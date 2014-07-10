@@ -87,9 +87,8 @@
 							</h:column>
 
 						</h:dataTable>
-
 						<h:dataTable var="bap"
-							value="#{contratController.currentAvenantContratDto.bapReferents.codeBAPReferens}"
+							value="#{contratController.currentAvenantContratDto.bapReferents}"
 							rendered="#{not empty contratController.currentAvenantContratDto.bapReferents.codeBAPReferens}"
 							columnClasses="list-column-center"
 							headerClass="portlet-table-header" rowClasses="portlet-font"
