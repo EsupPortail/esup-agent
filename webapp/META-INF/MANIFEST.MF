@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Implementation-Title: esup-agent
+Implementation-Version: 0.0.3
+Implementation-Vendor: ESUP-Portail consortium
