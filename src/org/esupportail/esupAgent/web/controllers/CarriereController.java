@@ -121,13 +121,14 @@ public class CarriereController extends AbstractContextAwareController {
 			}
 
 			this.carriereTree = new TreeModelBase(rootNode);
+			String[] expandPaths = this.carriereTree.getPathInformation("0:0");
+			this.carriereTree.getTreeState().expandPath(expandPaths);
+			
 		} else {
 			this.carriereTree = null;
-
 		}
-		String[] expandPaths = this.carriereTree.getPathInformation("0:0");
-		this.carriereTree.getTreeState().expandPath(expandPaths);
-		// return null;
+		
+		
 		return "navigationCarriere";
 	}
 

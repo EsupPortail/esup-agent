@@ -7,6 +7,7 @@ import gouv.education.harpege.transverse.dto.DossierRhAdministratif.Consultation
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementCarriereDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementCarriereFinalDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementsCarriereReponseWSDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementsCarriereReponseWSDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
@@ -391,10 +392,16 @@ public class Agent {
 								dateActuel);
 			}
 
-			CarriereDto_V2[] carriereDto_V2 = elementsCarriereReponseWSDto_V2
+/*			CarriereDto_V2[] carriereDto_V2 = elementsCarriereReponseWSDto_V2
 					.getElementsCarriereFinalDto_V2().getElementsCarriereDto();
 			return (carriereDto_V2[0].getElementCarriereDto())[0]
-					.getIndiceDto().getIndiceNouveauMajore();
+					.getIndiceDto().getIndiceNouveauMajore();*/
+			ElementCarriereFinalDto_V2 elementsCarriereFinalDto_V2 = elementsCarriereReponseWSDto_V2.getElementsCarriereFinalDto_V2();
+			if (elementsCarriereFinalDto_V2!=null){
+				CarriereDto_V2[] carriereDto_V2 = elementsCarriereFinalDto_V2.getElementsCarriereDto();
+				return (carriereDto_V2[0].getElementCarriereDto())[0].getIndiceDto().getIndiceNouveauMajore();
+			}
+			
 
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
