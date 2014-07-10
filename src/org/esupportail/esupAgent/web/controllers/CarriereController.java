@@ -166,6 +166,8 @@ public class CarriereController extends AbstractContextAwareController {
 	 * @return the currentElementCarriereDto
 	 */
 	public ElementCarriereDto getCurrentElementCarriereDto() {
+		//logger.info(currentElementCarriereDto.getCorpsDto().getCodeCorps());
+		//logger.info(currentCarriereDto.getTypePopulationDto().getLibelleLongTypePopulation());
 		return currentElementCarriereDto;
 	}
 

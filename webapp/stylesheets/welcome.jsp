@@ -15,11 +15,11 @@
 		styleClass="esup-agent-entete"
 		rendered="#{sessionController.currentUser != null}">
 		<h:outputText
-			value="#{welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil.prenom}  #{welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil.nomPatronymique}"
+			value="#{welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil_V2.prenom}  #{welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil_V2.nomPatronymique}"
 			styleClass="portlet-section-header" />
 		<h:outputText
-			rendered="#{welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil!=null || welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil.numen != null}"
-			value="Numen : #{welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil.numen}"
+			rendered="#{welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil_V2!=null || welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil_V2.numen != null}"
+			value="Numen : #{welcomeController.displayUser.agent.consultationEtatCivil.individuReponseEtatCivil_V2.numen}"
 			styleClass="portlet-section-header" />
 	</h:panelGrid>
 
@@ -62,17 +62,17 @@
 				<h:outputText styleClass="portlet-form-label"
 					value="#{msgs['WELCOME.TEXT.NOM']}" />
 				<h:outputText
-					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil.nomPatronymique}"
+					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil_V2.nomPatronymique}"
 					styleClass="portlet-font" />
 				<h:outputText styleClass="portlet-form-label"
 					value="#{msgs['WELCOME.TEXT.PRENOM']}" />
 				<h:outputText
-					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil.prenom}"
+					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil_V2.prenom}"
 					styleClass="portlet-font" />
 				<h:outputText styleClass="portlet-form-label"
 					value="#{msgs['WELCOME.TEXT.DATENAISSANCE']}" />
 				<h:outputText
-					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil.dateNaissance.time}"
+					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil_V2.dateNaissance.time}"
 					styleClass="portlet-font">
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"
 						locale="Locale.FRANCE" />
@@ -80,12 +80,12 @@
 				<h:outputText styleClass="portlet-form-label"
 					value="#{msgs['WELCOME.TEXT.LIEUNAISSANCE']}"/>
 				<h:outputText
-					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil.villeDeNaissance}"
+					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil_V2.villeDeNaissance}"
 					styleClass="portlet-font" />
 				<h:outputText styleClass="portlet-form-label"
 					value="#{msgs['WELCOME.TEXT.PAYSNAISSANCE']}" />
 				<h:outputText
-					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil.paysNaissanceDto.paysNaissance}"
+					value="#{welcomeController.displayUser.agent.consulterEtatCivil.individuReponseEtatCivil_V2.paysNaissanceDto.paysNaissance}"
 					styleClass="portlet-font" />
 			</h:panelGrid>
 		</h:panelGroup>

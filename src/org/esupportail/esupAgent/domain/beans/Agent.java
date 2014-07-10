@@ -168,7 +168,7 @@ public class Agent {
 							.getdossierRhPersonnel();
 					consulterEtatCivil = dossierRhPersonnelWS
 							.consulterEtatCivil_V2(supannEmpId);
-				} else {
+				} else {					
 					dossierRhPersonnelWSStub = (DossierRhPersonnelSoapBindingStub) dossierRhPersonnelWebServiceServiceLocator
 							.getdossierRhPersonnel();
 					dossierRhPersonnelWSStub.setUsername(wsdl_usr_name);
@@ -191,7 +191,7 @@ public class Agent {
 				logger.info("erreur" + e.getMessage());
 			}
 			logger.info("Agent :: nom "
-					+ consulterEtatCivil.getIndividuReponseEtatCivil()
+					+ consulterEtatCivil.getIndividuReponseEtatCivil_V2()
 							.getNomPatronymique());
 		}
 		return consulterEtatCivil;
@@ -399,7 +399,7 @@ public class Agent {
 			ElementCarriereFinalDto_V2 elementsCarriereFinalDto_V2 = elementsCarriereReponseWSDto_V2.getElementsCarriereFinalDto_V2();
 			if (elementsCarriereFinalDto_V2!=null){
 				CarriereDto_V2[] carriereDto_V2 = elementsCarriereFinalDto_V2.getElementsCarriereDto();
-				return (carriereDto_V2[0].getElementCarriereDto())[0].getIndiceDto().getIndiceNouveauMajore();
+				return (carriereDto_V2[carriereDto_V2.length-1].getElementCarriereDto())[carriereDto_V2[carriereDto_V2.length-1].getElementCarriereDto().length-1].getIndiceDto().getIndiceNouveauMajore();
 			}
 			
 

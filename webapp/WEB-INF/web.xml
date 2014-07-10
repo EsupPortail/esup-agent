@@ -187,10 +187,15 @@
 			<param-name>portlet-guid</param-name>
 			<param-value>esup-agent.esup-agent</param-value>
 		</init-param>
+		<init-param>
+			<param-name>portlet-name</param-name>
+			<param-value>esup-agent</param-value>
+		</init-param>		
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>esup-agent</servlet-name>
-		<url-pattern>/esup-agent/*</url-pattern>
+		<url-pattern>/PlutoInvoker/esup-agent</url-pattern>
 	</servlet-mapping>
 
 <!--END-PORTLET-ONLY-->

@@ -159,20 +159,20 @@ logger.info(((AgentApplicationServiceImpl) getApplicationService())
 				logger.info("erreur consultation civil");
 
 			} else if (currentAgent.getConsultationEtatCivil()
-					.getIndividuReponseEtatCivil() == null) {
+					.getIndividuReponseEtatCivil_V2() == null) {
 				logger.info(currentAgent.getConsultationEtatCivil().toString());
 				logger.info("erreur dans getNomPatronymique()");
 			} else {
 				logger.info("nom : "
 						+ currentAgent.getConsultationEtatCivil()
-								.getIndividuReponseEtatCivil()
+								.getIndividuReponseEtatCivil_V2()
 								.getNomPatronymique());
 				logger.info("prenom : "
 						+ currentAgent.getConsultationEtatCivil()
-								.getIndividuReponseEtatCivil().getPrenom());
+								.getIndividuReponseEtatCivil_V2().getPrenom());
 				logger.info("prenom : "
 						+ currentAgent.getConsultationEtatCivil()
-								.getIndividuReponseEtatCivil().getCivilite());
+								.getIndividuReponseEtatCivil_V2().getCivilite());
 			}
 		} catch (Exception e) {
 			logger.info("erreur" + e.getMessage());

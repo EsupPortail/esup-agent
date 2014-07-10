@@ -130,7 +130,7 @@ implements DaoService, InitializingBean {
 		return versionManagers.get(0);
 		*/
 		VersionManager versionManager=new VersionManager();
-		versionManager.setVersion("0.0.7");
+		versionManager.setVersion("0.0.9");
 		return versionManager;
 	}
 

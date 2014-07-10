@@ -74,7 +74,7 @@
 						</h:panelGrid>
 
 						<h:dataTable var="bap"
-							value="#{carriereController.currentCarriereDto.bapReferensDto}"
+							value="#{carriereController.currentCarriereDto.bapReferensDto_V2}"
 							columnClasses="list-column-center"
 							headerClass="portlet-table-header" rowClasses="portlet-font"
 							width="100%">

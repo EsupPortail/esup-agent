@@ -103,7 +103,7 @@ div.esupAgent .esup-agent-portlet-display-list {
 	display: table-cell;
 	width: 250px;
 	padding: 5px;
-	background: #ffffff;
+	/*background: #ffffff;*/
 }
 
 div.esupAgent .esup-agent-portlet-display-detail {
@@ -111,7 +111,7 @@ div.esupAgent .esup-agent-portlet-display-detail {
 	display: table-cell;
 	width: 600px;
 	padding: 25px;
-	background: #ffffff;
+	/*background: #ffffff;*/
 }
 
 div.esupAgent .esup-agent-warning {
