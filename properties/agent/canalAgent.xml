@@ -23,8 +23,22 @@
 		<property name="wsdl_url_dossier_rh_administratif"
 			value="${wsdl.url_dossier_rh_administratif}">
 		</property>
-
-
+		<property name="ldap_HarpegeId"
+			value="${ldap.HarpegeId}" >
+		</property>
+		<property name="visualisationCompte"
+			value="${agent.visualisationCompte}" >
+		</property>	
+		<property name="contactHarpege"
+			value="${agent.contactHarpege}" >
+		</property>
+		<property name="wsdl_anonymous"
+			value="${wsdl.anonymous}"></property>		
+		<property name="wsdl_usr_name"
+			value="${wsdl.usr_name}"></property>		
+		<property name="wsdl_usr_password"
+			value="${wsdl.usr_password}"></property>		
+				
 	</bean>
 
 </beans>

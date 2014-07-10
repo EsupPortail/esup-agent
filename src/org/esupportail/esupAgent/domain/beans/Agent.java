@@ -1,23 +1,13 @@
 package org.esupportail.esupAgent.domain.beans;
 
-import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-
-import javax.xml.rpc.ServiceException;
-
-import org.esupportail.commons.services.logging.Logger;
-import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.esupAgent.domain.beans.comparators.AvenantContratSort;
-import org.esupportail.esupAgent.domain.beans.comparators.ContratSort;
-import org.esupportail.esupAgent.domain.beans.comparators.DiplomeSort;
-
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesAvancement.DonneesAvancementDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesAvancement.DonneesAvancementReponseWSDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesTableauAvancement.DonneesTableauxAvancementDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationDonneesTableauAvancement.DonneesTableauxAvancementReponseWSDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto_V2;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementCarriereFinalDto_V2;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementCarriereDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementsCarriereReponseWSDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementsCarriereReponseWSDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.InformationsContratsDto;
@@ -27,23 +17,50 @@ import gouv.education.harpege.transverse.dto.DossierRhAdministratif.Consultation
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.InformationsOccupationAffectationReponseWSDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonneesPersonnelles.ConsultationCoordonneesPersonnellesDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonneesPersonnelles.ConsultationCoordonneesPersonnellesReponseWSDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonnneesBancaires.ConsultationCoordonneesBancairesDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonnneesBancaires.ConsultationCoordonneesBancairesReponseWSDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationDiplomes.ConsultationDiplomesDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationDiplomes.ConsultationDiplomesReponseWSDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationInformationsEtatCivil.ConsultationEtatCivilResponseWSDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituationFamiliale.ConsultationSituationFamilialeDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituationFamiliale.ConsultationSituationFamilialeReponseWSDto_V2;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituationFamiliale.EnfantDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituationFamiliale.EnfantDto_V2;
 import gouv.education.harpege.transverse.exception.HarpegeFonctionnelleException;
 import gouv.education.harpege.transverse.exception.HarpegeTechniqueException;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.DossierRhAdministratifSoapBindingStub;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.DossierRhAdministratifWebService;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.DossierRhAdministratifWebServiceServiceLocator;
+import gouv.education.harpege.webservice.client.dossierRhPersonnel.DossierRhPersonnelSoapBindingStub;
 import gouv.education.harpege.webservice.client.dossierRhPersonnel.DossierRhPersonnelWebService;
 import gouv.education.harpege.webservice.client.dossierRhPersonnel.DossierRhPersonnelWebServiceServiceLocator;
-import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationDiplomes.ConsultationDiplomesDto;
+
+import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.GregorianCalendar;
+
+import javax.xml.rpc.ServiceException;
+
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
+import org.esupportail.esupAgent.domain.beans.comparators.AvenantContratSort;
+import org.esupportail.esupAgent.domain.beans.comparators.ContratSort;
+import org.esupportail.esupAgent.domain.beans.comparators.DiplomeSort;
+import org.esupportail.esupAgent.domain.beans.comparators.EnfantSort;
 
 /**
  * @author uhp
  * 
  */
 public class Agent {
+	private boolean wsdl_anonymous;
+	private String wsdl_usr_name;
+	private String wsdl_usr_password;
+	private boolean visualisationCompte;
 	private Integer supannEmpId;
 	private DossierRHAdministratif dossierRHAdministratif;
 	private DossierRhPersonnelWebServiceServiceLocator dossierRhPersonnelWebServiceServiceLocator;
@@ -51,6 +68,7 @@ public class Agent {
 	private String wsdl_url_dossier_rh_administratif;
 	private String wsdl_url_dossier_rh_personnel;
 	private DossierRhPersonnelWebService dossierRhPersonnelWS;
+	private DossierRhPersonnelSoapBindingStub dossierRhPersonnelWSStub;
 	private ConsultationEtatCivilResponseWSDto_V2 consulterEtatCivil;
 	private ConsultationSituationFamilialeReponseWSDto_V2 consulterSituationFamiliale;
 
@@ -61,8 +79,54 @@ public class Agent {
 	private ConsultationSituationFamilialeDto_V2 consulterSituationFamilleDto;
 	private ConsultationCoordonneesPersonnellesDto[] consulterCoordonneesPersonnellesDto;
 	private ConsultationDiplomesReponseWSDto consulterDiplomes;
-	private DossierRhAdministratifWebService dossierRhAdministratifWebSerice;
+	private DossierRhAdministratifWebService dossierRhAdministratifWebService;
+	private DossierRhAdministratifSoapBindingStub dossierRhAdministratifWebServiceStub;
 	private ArrayList<AvenantContratDto> lstAvenantsContratDto;
+
+	/**
+	 * @return the wsdl_anonymous
+	 */
+	public boolean getWsdl_anonymous() {
+		return wsdl_anonymous;
+	}
+
+	/**
+	 * @param wsdl_anonymous
+	 *            the wsdl_anonymous to set
+	 */
+	public void setWsdl_anonymous(boolean wsdl_anonymous) {
+		this.wsdl_anonymous = wsdl_anonymous;
+	}
+
+	/**
+	 * @return the wsdl_usr_name
+	 */
+	public String getWsdl_usr_name() {
+		return wsdl_usr_name;
+	}
+
+	/**
+	 * @param wsdl_usr_name
+	 *            the wsdl_usr_name to set
+	 */
+	public void setWsdl_usr_name(String wsdl_usr_name) {
+		this.wsdl_usr_name = wsdl_usr_name;
+	}
+
+	/**
+	 * @return the wsdl_usr_password
+	 */
+	public String getWsdl_usr_password() {
+		return wsdl_usr_password;
+	}
+
+	/**
+	 * @param wsdl_usr_password
+	 *            the wsdl_usr_password to set
+	 */
+	public void setWsdl_usr_password(String wsdl_usr_password) {
+		this.wsdl_usr_password = wsdl_usr_password;
+	}
 
 	public DossierRHAdministratif getDossierRHAdministratif() {
 		return dossierRHAdministratif;
@@ -98,11 +162,20 @@ public class Agent {
 					.setdossierRhPersonnelEndpointAddress(wsdl_url_dossier_rh_personnel);
 
 			try {
-				dossierRhPersonnelWS = dossierRhPersonnelWebServiceServiceLocator
-						.getdossierRhPersonnel();
+				if (wsdl_anonymous) {
+					dossierRhPersonnelWS = dossierRhPersonnelWebServiceServiceLocator
+							.getdossierRhPersonnel();
+					consulterEtatCivil = dossierRhPersonnelWS
+							.consulterEtatCivil_V2(supannEmpId);
+				} else {
+					dossierRhPersonnelWSStub = (DossierRhPersonnelSoapBindingStub) dossierRhPersonnelWebServiceServiceLocator
+							.getdossierRhPersonnel();
+					dossierRhPersonnelWSStub.setUsername(wsdl_usr_name);
+					dossierRhPersonnelWSStub.setPassword(wsdl_usr_password);
+					consulterEtatCivil = dossierRhPersonnelWSStub
+							.consulterEtatCivil_V2(supannEmpId);
+				}
 
-				consulterEtatCivil = dossierRhPersonnelWS
-						.consulterEtatCivil_V2(supannEmpId);
 			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
 				logger.info("erreur" + e.getMessage());
@@ -130,13 +203,37 @@ public class Agent {
 		return consulterEtatCivil;
 	}
 
+	public EnfantDto_V2[] getListeEnfants() {
+		if (consulterSituationFamilleDto != null) {
+			EnfantDto_V2[] lstEnfants = consulterSituationFamilleDto
+					.getListeEnfants();
+
+			if (lstEnfants != null) {
+				Comparator<EnfantDto_V2> eltComparaison = new EnfantSort();
+				Arrays.sort(lstEnfants, eltComparaison);
+
+				return lstEnfants;
+			}
+
+			return null;
+		}
+
+		return null;
+	}
+
 	/**
 	 * @return the consulterSituationFamiliale
 	 */
 	public ConsultationSituationFamilialeDto_V2 getConsulterSituationFamiliale() {
 		try {
-			ConsultationSituationFamilialeReponseWSDto_V2 consulterSituationFamilialeWSDto_V2 = dossierRhPersonnelWS
-					.consulterSituationFamiliale_V2(supannEmpId);
+			ConsultationSituationFamilialeReponseWSDto_V2 consulterSituationFamilialeWSDto_V2;
+			if (wsdl_anonymous) {
+				consulterSituationFamilialeWSDto_V2 = dossierRhPersonnelWS
+						.consulterSituationFamiliale_V2(supannEmpId);
+			} else {
+				consulterSituationFamilialeWSDto_V2 = dossierRhPersonnelWSStub
+						.consulterSituationFamiliale_V2(supannEmpId);
+			}
 			consulterSituationFamilleDto = consulterSituationFamilialeWSDto_V2
 					.getConsultationSituationFamilleDto();
 		} catch (HarpegeTechniqueException e) {
@@ -150,6 +247,32 @@ public class Agent {
 			e.printStackTrace();
 		}
 		return consulterSituationFamilleDto;
+	}
+
+	public ConsultationCoordonneesBancairesDto[] getConsultationCoordonneesBancaires() {
+		ConsultationCoordonneesBancairesDto[] consultationCoordonneesBancairesDto = null;
+		try {
+			ConsultationCoordonneesBancairesReponseWSDto consulterCoordonneesBancaires;
+			if (wsdl_anonymous) {
+				consulterCoordonneesBancaires = dossierRhPersonnelWS
+						.consulterCoordonneesBancaires(supannEmpId, "P");
+			} else {
+				consulterCoordonneesBancaires = dossierRhPersonnelWSStub
+						.consulterCoordonneesBancaires(supannEmpId, "P");
+			}
+			consultationCoordonneesBancairesDto = consulterCoordonneesBancaires
+					.getListeCoordonneesBancairesDto();
+		} catch (HarpegeTechniqueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (HarpegeFonctionnelleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return consultationCoordonneesBancairesDto;
 	}
 
 	/**
@@ -220,8 +343,14 @@ public class Agent {
 
 	public ConsultationCoordonneesPersonnellesDto[] getConsulterCoordonneesPersonnellesDto() {
 		try {
-			ConsultationCoordonneesPersonnellesReponseWSDto consulterCoordonneesPersonnelles = dossierRhPersonnelWS
-					.consulterCoordonneesPersonnelles(supannEmpId, "O");
+			ConsultationCoordonneesPersonnellesReponseWSDto consulterCoordonneesPersonnelles;
+			if (wsdl_anonymous) {
+				consulterCoordonneesPersonnelles = dossierRhPersonnelWS
+						.consulterCoordonneesPersonnelles(supannEmpId, "O");
+			} else {
+				consulterCoordonneesPersonnelles = dossierRhPersonnelWSStub
+						.consulterCoordonneesPersonnelles(supannEmpId, "O");
+			}
 			consulterCoordonneesPersonnellesDto = consulterCoordonneesPersonnelles
 					.getListeCoordonneesPersonnelleDto();
 
@@ -236,6 +365,118 @@ public class Agent {
 		return null;
 	}
 
+	public String getConsulterDonneesActuelles() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			dossierRhAdministratifWebServiceServiceLocator = new DossierRhAdministratifWebServiceServiceLocator();
+			dossierRhAdministratifWebServiceServiceLocator
+					.setdossierRhAdministratifEndpointAddress(wsdl_url_dossier_rh_administratif);
+
+			Calendar dateActuel = new GregorianCalendar();
+			ElementsCarriereReponseWSDto_V2 elementsCarriereReponseWSDto_V2 = null;
+			if (wsdl_anonymous) {
+				dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
+						.getdossierRhAdministratif();
+				elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebService
+						.consultationElementsCarriere_V2(supannEmpId,
+								dateActuel);
+			} else {
+				dossierRhAdministratifWebServiceStub = (DossierRhAdministratifSoapBindingStub) dossierRhAdministratifWebServiceServiceLocator
+						.getdossierRhAdministratif();
+				dossierRhAdministratifWebServiceStub.setUsername(wsdl_usr_name);
+				dossierRhAdministratifWebServiceStub
+						.setPassword(wsdl_usr_password);
+				elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebServiceStub
+						.consultationElementsCarriere_V2(supannEmpId,
+								dateActuel);
+			}
+
+			CarriereDto_V2[] carriereDto_V2 = elementsCarriereReponseWSDto_V2
+					.getElementsCarriereFinalDto_V2().getElementsCarriereDto();
+			return (carriereDto_V2[0].getElementCarriereDto())[0]
+					.getIndiceDto().getIndiceNouveauMajore();
+
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (HarpegeTechniqueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (HarpegeFonctionnelleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public DonneesAvancementDto[] getConsulterDonneesAvancement() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			dossierRhAdministratifWebServiceServiceLocator = new DossierRhAdministratifWebServiceServiceLocator();
+			dossierRhAdministratifWebServiceServiceLocator
+					.setdossierRhAdministratifEndpointAddress(wsdl_url_dossier_rh_administratif);
+
+			dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
+					.getdossierRhAdministratif();
+			DonneesAvancementReponseWSDto donneesAvancementReponseWSDto;
+
+			if (wsdl_anonymous) {
+				dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
+						.getdossierRhAdministratif();
+				donneesAvancementReponseWSDto = dossierRhAdministratifWebService
+						.consulterDonneesAvancement(supannEmpId);
+			} else {
+				dossierRhAdministratifWebServiceStub = (DossierRhAdministratifSoapBindingStub) dossierRhAdministratifWebServiceServiceLocator
+						.getdossierRhAdministratif();
+				dossierRhAdministratifWebServiceStub.setUsername(wsdl_usr_name);
+				dossierRhAdministratifWebServiceStub
+						.setPassword(wsdl_usr_password);
+				donneesAvancementReponseWSDto = dossierRhAdministratifWebServiceStub
+						.consulterDonneesAvancement(supannEmpId);
+			}
+
+			for (DonneesAvancementDto da : donneesAvancementReponseWSDto
+					.getDonneesAvancementDto()) {
+				logger.info("Bonification échelon : "
+						+ da.getBonificationEchelon());
+				logger.info("Echelon : "
+						+ da.getEchelonFuturDto().getCodeEchelonFutur());
+				logger.info("Libellé échelon"
+						+ da.getEchelonFuturDto().getLibelleEchelonFutur());
+				logger.info("INM : " + da.getIndiceMajoreFutur());
+
+				logger.info("Indice brut : " + da.getIndiceBrutFutur());
+				if (da.getDatePrevisionnelle() != null) {
+					logger.info("Date prévisionnelle : "
+							+ sdf.format(da.getDatePrevisionnelle().getTime()));
+				}
+				logger.info(da.getBonificationEchelon());
+
+			}
+
+			return donneesAvancementReponseWSDto.getDonneesAvancementDto();
+
+		} catch (HarpegeTechniqueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (HarpegeFonctionnelleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 	/**
 	 * @return the consulterDiplomes
 	 */
@@ -243,8 +484,16 @@ public class Agent {
 		consulterDiplomes = null;
 		try {
 
-			consulterDiplomes = dossierRhPersonnelWS
-					.consulterDiplomes(supannEmpId);
+			if (wsdl_anonymous) {
+
+				consulterDiplomes = dossierRhPersonnelWS
+						.consulterDiplomes(supannEmpId);
+			} else {
+
+				consulterDiplomes = dossierRhPersonnelWSStub
+						.consulterDiplomes(supannEmpId);
+			}
+
 			logger.info("consulterDiplomes " + consulterDiplomes.toString());
 			logger.info("consulterDiplomes " + consulterDiplomes.getTaille());
 			if (consulterDiplomes.getTaille() != 0) {
@@ -280,11 +529,21 @@ public class Agent {
 			dossierRhAdministratifWebServiceServiceLocator
 					.setdossierRhAdministratifEndpointAddress(wsdl_url_dossier_rh_administratif);
 
-			dossierRhAdministratifWebSerice = dossierRhAdministratifWebServiceServiceLocator
-					.getdossierRhAdministratif();
+			if (wsdl_anonymous) {
+				dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
+						.getdossierRhAdministratif();
 
-			elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebSerice
-					.consultationElementsCarriere_V2(supannEmpId, null);
+				elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebService
+						.consultationElementsCarriere_V2(supannEmpId, null);
+			} else {
+				dossierRhAdministratifWebServiceStub = (DossierRhAdministratifSoapBindingStub) dossierRhAdministratifWebServiceServiceLocator
+						.getdossierRhAdministratif();
+				dossierRhAdministratifWebServiceStub.setUsername(wsdl_usr_name);
+				dossierRhAdministratifWebServiceStub
+						.setPassword(wsdl_usr_password);
+				elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebServiceStub
+						.consultationElementsCarriere_V2(supannEmpId, null);
+			}
 
 			if (elementsCarriereReponseWSDto_V2
 					.getElementsCarriereFinalDto_V2() != null) {
@@ -320,11 +579,26 @@ public class Agent {
 			dossierRhAdministratifWebServiceServiceLocator = new DossierRhAdministratifWebServiceServiceLocator();
 			dossierRhAdministratifWebServiceServiceLocator
 					.setdossierRhAdministratifEndpointAddress(wsdl_url_dossier_rh_administratif);
-			dossierRhAdministratifWebSerice = dossierRhAdministratifWebServiceServiceLocator
-					.getdossierRhAdministratif();
+
 			try {
-				informationsContratsReponseWSDto = dossierRhAdministratifWebSerice
-						.consulterInformationsContrats(supannEmpId, null);
+
+				if (wsdl_anonymous) {
+					dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
+							.getdossierRhAdministratif();
+					informationsContratsReponseWSDto = dossierRhAdministratifWebService
+							.consulterInformationsContrats(supannEmpId, null);
+
+				} else {
+					dossierRhAdministratifWebServiceStub = (DossierRhAdministratifSoapBindingStub) dossierRhAdministratifWebServiceServiceLocator
+							.getdossierRhAdministratif();
+					dossierRhAdministratifWebServiceStub
+							.setUsername(wsdl_usr_name);
+					dossierRhAdministratifWebServiceStub
+							.setPassword(wsdl_usr_password);
+					informationsContratsReponseWSDto = dossierRhAdministratifWebServiceStub
+							.consulterInformationsContrats(supannEmpId, null);
+				}
+
 
 				lstContrats = informationsContratsReponseWSDto
 						.getInformationsContratsDto();
@@ -354,6 +628,9 @@ public class Agent {
 
 	public void getAvenantsContrat() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Comparator<AvenantContratDto> eltComparaison = new AvenantContratSort();
+
+		InformationsContratsReponseWSDto informationsContratsReponseWSDto;
 
 		logger.info(wsdl_url_dossier_rh_administratif);
 		if (lstAvenantsContratDto == null) {
@@ -364,59 +641,97 @@ public class Agent {
 			dossierRhAdministratifWebServiceServiceLocator = new DossierRhAdministratifWebServiceServiceLocator();
 			dossierRhAdministratifWebServiceServiceLocator
 					.setdossierRhAdministratifEndpointAddress(wsdl_url_dossier_rh_administratif);
-			dossierRhAdministratifWebSerice = dossierRhAdministratifWebServiceServiceLocator
+			dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
 					.getdossierRhAdministratif();
-			logger.info(dossierRhAdministratifWebSerice.toString());
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
 
-		Comparator<AvenantContratDto> eltComparaison = new AvenantContratSort();
+				if (wsdl_anonymous) {
+					dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
+							.getdossierRhAdministratif();
+					informationsContratsReponseWSDto = dossierRhAdministratifWebService
+							.consulterInformationsContrats(supannEmpId, null);
 
-		InformationsContratsReponseWSDto informationsContratsReponseWSDto;
-		try {
-			informationsContratsReponseWSDto = dossierRhAdministratifWebSerice
-					.consulterInformationsContrats(supannEmpId, null);
-
-			for (int i = 0; i < informationsContratsReponseWSDto
-					.getInformationsContratsDto().length; i++) {
-				AvenantContratDto[] avenantContratDto = informationsContratsReponseWSDto
-						.getInformationsContratsDto()[i].getAvenantContratDto();
-				for (int j = 0; j < avenantContratDto.length; j++) {
-					// lstAvenantsContratDto.add(avenantContratDto[j]);
-					logger.info(sdf.format(avenantContratDto[j]
-							.getDateDebutContrat().getTime()));
+				} else {
+					dossierRhAdministratifWebServiceStub = (DossierRhAdministratifSoapBindingStub) dossierRhAdministratifWebServiceServiceLocator
+							.getdossierRhAdministratif();
+					dossierRhAdministratifWebServiceStub
+							.setUsername(wsdl_usr_name);
+					dossierRhAdministratifWebServiceStub
+							.setPassword(wsdl_usr_password);
+					informationsContratsReponseWSDto = dossierRhAdministratifWebServiceStub
+							.consulterInformationsContrats(supannEmpId, null);
 				}
-			}
-			/*
-			 * Collections.sort(lstAvenantsContratDto, eltComparaison);
-			 * 
-			 * for (int i = 0; i < lstAvenantsContratDto.size(); i++) { logger
-			 * .info(lstAvenantsContratDto.get(i) .getDateDebutContrat() + " - "
-			 * + lstAvenantsContratDto.get(i) .getDateFinContrat() + " " +
-			 * lstAvenantsContratDto.get(i) .getNumeroAvenant()); }
-			 */
 
-		} catch (HarpegeTechniqueException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HarpegeFonctionnelleException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
+				for (int i = 0; i < informationsContratsReponseWSDto
+						.getInformationsContratsDto().length; i++) {
+					AvenantContratDto[] avenantContratDto = informationsContratsReponseWSDto
+							.getInformationsContratsDto()[i]
+							.getAvenantContratDto();
+					for (int j = 0; j < avenantContratDto.length; j++) {
+						// lstAvenantsContratDto.add(avenantContratDto[j]);
+						logger.info(sdf.format(avenantContratDto[j]
+								.getDateDebutContrat().getTime()));
+					}
+				}
+				/*
+				 * Collections.sort(lstAvenantsContratDto, eltComparaison);
+				 * 
+				 * for (int i = 0; i < lstAvenantsContratDto.size(); i++) {
+				 * logger .info(lstAvenantsContratDto.get(i)
+				 * .getDateDebutContrat() + " - " + lstAvenantsContratDto.get(i)
+				 * .getDateFinContrat() + " " + lstAvenantsContratDto.get(i)
+				 * .getNumeroAvenant()); }
+				 */
+
+			} catch (HarpegeTechniqueException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (HarpegeFonctionnelleException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
+	/**
+	 * @return the visualisationCompte
+	 */
+	public boolean getVisualisationCompte() {
+		return visualisationCompte;
+	}
+
+	/**
+	 * @param visualisationCompte
+	 *            the visualisationCompte to set
+	 */
+	public void setVisualisationCompte(boolean visualisationCompte) {
+		this.visualisationCompte = visualisationCompte;
+	}
+
 	public InformationsOccupationAffectationDto[] getOccupationAffectation(
 			String numeroContrat, Calendar date) {
 		try {
-			InformationsOccupationAffectationReponseWSDto informationsOccupationAffectationReponseWSDto = dossierRhAdministratifWebSerice
-					.consulterInformationsOccupationAffectation(supannEmpId,
-							numeroContrat, date);
+
+			InformationsOccupationAffectationReponseWSDto informationsOccupationAffectationReponseWSDto;
+
+			if (wsdl_anonymous) {
+				informationsOccupationAffectationReponseWSDto = dossierRhAdministratifWebService
+						.consulterInformationsOccupationAffectation(
+								supannEmpId, numeroContrat, date);
+
+			} else {
+				informationsOccupationAffectationReponseWSDto = dossierRhAdministratifWebServiceStub
+						.consulterInformationsOccupationAffectation(
+								supannEmpId, numeroContrat, date);
+			}
 			InformationOccupationAffectationGlobalDto informationOccupationAffectationGlobalDto = informationsOccupationAffectationReponseWSDto
 					.getInformationsOccupationAffectationGlobalDto();
 			if (informationOccupationAffectationGlobalDto != null) {

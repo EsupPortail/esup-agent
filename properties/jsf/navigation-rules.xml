@@ -122,6 +122,15 @@
 		</navigation-case>
 
 		<navigation-case>
+			<from-outcome>navigationAvancement</from-outcome>
+			<to-view-id>/stylesheets/avancement.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationQuestion</from-outcome>
+			<to-view-id>/stylesheets/question.jsp</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
 			<from-outcome>casLogin</from-outcome>
 			<to-view-id>/stylesheets/cas.jsp</to-view-id>
 		</navigation-case>

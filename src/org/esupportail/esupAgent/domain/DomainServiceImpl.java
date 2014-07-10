@@ -19,6 +19,7 @@ import org.esupportail.esupAgent.dao.DaoService;
 import org.esupportail.esupAgent.domain.beans.Agent;
 import org.esupportail.esupAgent.domain.beans.User;
 import org.esupportail.esupAgent.domain.beans.VersionManager;
+import org.esupportail.esupAgent.domain.beans.config.ConfigAgent;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
@@ -125,12 +126,28 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		}
 
 		logger.info("in setUserInfo method");
-
-		String supannEmpId = ldapUser.getAttribute("supannEmpId");
+logger.info(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getLdap_HarpegeId());
+		String supannEmpId = ldapUser.getAttribute(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getLdap_HarpegeId());
 
 		logger.info("supannEmpId : " + supannEmpId);
 
 		currentAgent.setSupannEmpId(new Integer(supannEmpId).intValue());
+		currentAgent.setVisualisationCompte(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getVisualisationCompte());
+	
+		
+		
+		currentAgent.setWsdl_anonymous(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getWsdl_anonymous());
+		currentAgent.setWsdl_usr_name(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getWsdl_usr_name());
+		currentAgent.setWsdl_usr_password(((AgentApplicationServiceImpl) getApplicationService())
+				.getConfigAgent().getWsdl_usr_password());
+
+		
+		
 		currentAgent
 				.setWsdl_url_dossier_rh_personnel(((AgentApplicationServiceImpl) getApplicationService())
 						.getConfigAgent().getWsdl_url_dossier_rh_personnel());

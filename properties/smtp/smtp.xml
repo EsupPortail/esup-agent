@@ -8,7 +8,7 @@
 
     <bean 
     	id="smtpService" 
-    	class="org.esupportail.commons.services.smtp.AsynchronousSmtpServiceImpl" 
+    	class="org.esupportail.commons.services.smtp.SimpleSmtpServiceImpl" 
     	lazy-init="true"
     	>
         <property name="servers">

@@ -1,7 +1,83 @@
 @CHARSET "UTF-8";
 
-.esup-agent-portlet-subsection-header {
-	background-color: #A6A5D9;
+div.esupAgent {
+	font-size: 12px;
+	padding-bottom: 14px;
+}
+
+div.esupAgent .portlet-menu {
+	background-image: url(images/banner_agent.png);
+	background-repeat: no-repeat;
+	background-position:top center;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+div.esupAgent .portlet-menu-item input {
+	background-color: transparent;
+	border-style: none;
+	color: #ffffff;
+	cursor: pointer;
+	display: inline;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 5px 10px;
+	padding: 5px;
+}
+
+div.esupAgent .portlet-menu-item-selected input {
+	background: transparent;
+	border-style: none;
+	color: rgb(153, 51, 51);
+	cursor: pointer;
+	display: inline;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 5px 10px;
+	padding: 5px
+}
+
+div.esupAgent .portlet-section-header {
+	color: rgb(185, 158, 126);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+
+
+div.esupAgent .portlet-subsection-header {
+	background-color: #B99E7E;
+	color: #ffffff;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	vertical-align: bottom;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+div.esupAgent .portlet-font {
+	color: #65625c;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+div.esupAgent .portlet-form-label {
+	width: 10em;
+	text-align: left;
+	color: #65625c;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: italic;
+}
+
+div.esupAgent .portlet-datatable-header {
+	background-color: #AF0417;
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -9,28 +85,28 @@
 	font-size: 12px;
 }
 
-.esup-agent-portlet-datatable-header {
-	background-color: #A6A5D9;
-	margin: 0;
+div.esupAgent .portlet-table-header {
+	background-color: #a8a188;
+	margin-top: 0;
 	padding: 0;
 	text-align: center;
 	vertical-align: bottom;
 	font-size: 12px;
 }
 
-.esup-agent-portlet-display-block {
+div.esupAgent .esup-agent-portlet-display-block {
 	display: block;
 	margin-bottom: 20px;
 }
 
-.esup-agent-portlet-display-list {
+div.esupAgent .esup-agent-portlet-display-list {
 	display: table-cell;
 	width: 250px;
 	padding: 5px;
 	background: #ffffff;
 }
 
-.esup-agent-portlet-display-detail {
+div.esupAgent .esup-agent-portlet-display-detail {
 	border-left: 1px solid #ffffff;
 	display: table-cell;
 	width: 600px;
@@ -38,17 +114,22 @@
 	background: #ffffff;
 }
 
-.esup-agent-warning {
+div.esupAgent .esup-agent-warning {
 	border: 2px solid #cc0000;
 	padding: 10px;
 	font-weight: bold;
 	color: #cc0000;
 }
 
-esup-agent-entete {
+div.esupAgent esup-agent-entete {
 	margin: 10px;
 	padding-left: 28px;
 	text-align: center;
 	vertical-align: bottom;
 	font-size: 14px;
+}
+
+div.esupAgent .selectedNode {
+	background-color: #B99E7E;
+	color: #ffffff;
 }

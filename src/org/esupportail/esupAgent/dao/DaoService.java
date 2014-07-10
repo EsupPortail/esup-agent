@@ -7,9 +7,9 @@ package org.esupportail.esupAgent.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.esupportail.commons.web.beans.Paginator;
 import org.esupportail.esupAgent.domain.beans.User;
 import org.esupportail.esupAgent.domain.beans.VersionManager;
-import org.esupportail.commons.web.beans.Paginator;
 
 /**
  * The DAO service interface.

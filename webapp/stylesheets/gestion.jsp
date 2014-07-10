@@ -1,6 +1,7 @@
 <%@include file="_include.jsp"%>
 
 <e:page stringsVar="msgs" menuItem="gestion" locale="#{sessionController.locale}" authorized="#{gestionController.pageAuthorized}" >
+<t:div styleClass="esupAgent">
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['GESTION.TITLE']}" />
 	
@@ -34,7 +35,7 @@
 	<h:panelGroup rendered="#{sessionController.currentUser == null}">
 		<e:paragraph value="#{msgs['GESTION.MSG.UNAUTHENTICATE']}" />
 	</h:panelGroup>
-
+</t:div>
 	<%
 		/* @include file="_debug.jsp" */
 	%>

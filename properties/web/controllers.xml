@@ -71,6 +71,20 @@
 		parent="abstractContextAwareController" scope="session">
 		<description>A bean to manage the carriere page.</description>
 	</bean>
+	
+	<bean id="avancementController"
+		class="org.esupportail.esupAgent.web.controllers.AvancementController"
+		parent="abstractContextAwareController" scope="session">
+		<description>A bean to manage the avancement page.</description>
+	</bean>
+
+	<bean id="questionController"
+		class="org.esupportail.esupAgent.web.controllers.QuestionController"
+		parent="abstractContextAwareController" scope="session">
+		<description>A bean to manage the question page.</description>
+		<property name="smtpService" ref="smtpService" />
+	</bean>
+
 
 	<bean id="gestionController"
 		class="org.esupportail.esupAgent.web.controllers.GestionController"

@@ -28,9 +28,7 @@ public class InformationsContratsNode extends TreeNodeBase {
 	public InformationsContratsNode(
 			InformationsContratsDto informationsContratsDto) {
 		super(NODE_TYPE,
-				informationsContratsDto.getNumeroContrat()
-						+ " "
-						+ informationsContratsDto.getTypeContratDto().getLibelleCourt().toUpperCase(), false);
+				informationsContratsDto.getTypeContratDto().getLibelleLong().toUpperCase(), false);
 		this.informationsContratsDto = informationsContratsDto;
 	}
 

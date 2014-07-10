@@ -9,6 +9,7 @@ import gouv.education.harpege.transverse.dto.DossierRhAdministratif.Consultation
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto_V2;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementCarriereDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
+import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.AffectationRechercheDto;
 import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.InformationsOccupationAffectationDto;
 
 import org.apache.myfaces.custom.tree2.TreeModelBase;
@@ -38,7 +39,7 @@ public class CarriereController extends AbstractContextAwareController {
 
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-	private InformationsOccupationAffectationDto[] currentInformationsOccupationAffectationDto;
+	private InformationsOccupationAffectationDto[] currentInformationsOccupationAffectationDto=null;
 
 	public CarriereController() {
 		super();
@@ -124,6 +125,8 @@ public class CarriereController extends AbstractContextAwareController {
 			this.carriereTree = null;
 
 		}
+		String[] expandPaths = this.carriereTree.getPathInformation("0:0");
+		this.carriereTree.getTreeState().expandPath(expandPaths);
 		// return null;
 		return "navigationCarriere";
 	}
@@ -178,6 +181,19 @@ public class CarriereController extends AbstractContextAwareController {
 	 * @return the currentInformationsOccupationAffectationDto
 	 */
 	public InformationsOccupationAffectationDto[] getCurrentInformationsOccupationAffectationDto() {
+/*		if (currentInformationsOccupationAffectationDto!=null){
+			for (int i=0;i<currentInformationsOccupationAffectationDto.length;i++){
+				InformationsOccupationAffectationDto info=currentInformationsOccupationAffectationDto[i];
+				AffectationRechercheDto[]  affectationRechercheDto=info.getAffectationRechercheDto();
+				if (affectationRechercheDto!=null){
+					for (int k=0;k<affectationRechercheDto.length;k++){
+						System.out.println("affectation : " + affectationRechercheDto[k].getNumeroSequenceAffectationRecherche() + " - " + affectationRechercheDto[k].getStructureAffectationRechercheDto().getCodeStructureAffectationRecherche()+"-" +affectationRechercheDto[k].getStructureAffectationRechercheDto().getLibelleCourtStructureAffectationRecherche()+"-" + affectationRechercheDto[k].getStructureAffectationRechercheDto().getLibelleLongStructureAffectationRecherche());
+					}
+				} else{
+					System.out.println("Pas d'affectation recherche");
+				}
+			}
+		}*/
 		return currentInformationsOccupationAffectationDto;
 	}
 
@@ -186,7 +202,7 @@ public class CarriereController extends AbstractContextAwareController {
 	 *            the currentInformationsOccupationAffectationDto to set
 	 */
 	public void setCurrentInformationsOccupationAffectationDto(
-			InformationsOccupationAffectationDto[] currentInformationsOccupationAffectationDto) {
+			InformationsOccupationAffectationDto[] currentInformationsOccupationAffectationDto) {		
 		this.currentInformationsOccupationAffectationDto = currentInformationsOccupationAffectationDto;
 	}
 

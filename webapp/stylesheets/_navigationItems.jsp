@@ -14,10 +14,18 @@
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.CARRIERE']}"
 	action="#{carriereController.enter}"
 	rendered="#{carriereController.pageAuthorized}" />
+<e:menuItem id="avancement" value="#{msgs['NAVIGATION.TEXT.AVANCEMENT']}"
+	accesskey="#{msgs['NAVIGATION.ACCESSKEY.AVANCEMENT']}"
+	action="#{avancementController.enter}"
+	rendered="#{avancementController.pageAuthorized}" />	
 <e:menuItem id="gestion" value="#{msgs['NAVIGATION.TEXT.GESTION']}"
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.GESTION']}"
 	action="#{gestionController.enter}"
 	rendered="#{gestionController.pageAuthorized}" />
+<e:menuItem id="question" value="#{msgs['NAVIGATION.TEXT.QUESTION']}"
+	accesskey="#{msgs['NAVIGATION.ACCESSKEY.QUESTION']}"
+	action="#{questionController.enter}"
+	rendered="#{questionController.pageAuthorized}" />
 <e:menuItem id="login" action="casLogin"
 	value="#{msgs['NAVIGATION.TEXT.LOGIN']}"
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.LOGIN']}"

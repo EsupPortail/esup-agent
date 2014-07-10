@@ -2,6 +2,7 @@
 <e:page stringsVar="msgs" menuItem="about"
 	locale="#{sessionController.locale}"
 	authorized="#{aboutController.pageAuthorized}">
+<t:div styleClass="esupAgent">
 	<%@include file="_navigation.jsp"%>
 
 	<e:section value="#{msgs['CONTRAT.TITLE']}">
@@ -9,7 +10,7 @@
 		<f:param value="#{applicationService.version}" />
 	</e:section>
 
-
+	
 	<h:panelGroup rendered="#{sessionController.currentUser != null}">
 		<t:div styleClass="esup-agent-portlet-display-block"
 			rendered="#{contratController.contratTree == null}">
@@ -41,10 +42,10 @@
 							<f:facet name="avenantContrat">
 								<h:panelGroup>
 									<t:graphicImage value="/media/images/16x16/course.png" />
-									<e:text value="#{node.description}" />
+									
 									<t:commandLink
 										action="#{contratController.updateCurrentAvenantContratDto}">
-										<t:graphicImage value="/media/images/16x16/info.png" />
+										<e:text value="#{node.description}" />
 										<t:updateActionListener value="#{node.avenantContratDto}"
 											property="#{contratController.currentAvenantContratDto}" />
 										<t:updateActionListener
@@ -61,93 +62,95 @@
 				rendered="#{contratController.currentAvenantContratDto != null}"
 				styleClass="esup-agent-portlet-display-detail">
 				<h:panelGrid border="0" columns="1" cellpadding="10" width="100%"
-					styleClass="portlet-menu">
-					<h:outputText value="Contrat" styleClass="portlet-section-header" />
+					styleClass="portlet-subsection-header">
+					<h:outputText value="Contrat"  />
 				</h:panelGrid>
 				<h:panelGroup>
 					<h:panelGrid border="0" columns="2" cellspacing="10"
 						cellpadding="2">
-						<h:outputText styleClass="table-titre portlet-form-label"
+						<h:outputText styleClass="portlet-form-label"
 							value="Numéro du contrat" />
 						<h:outputText
 							value="#{contratController.currentContratDto.numeroContrat}"
-							styleClass="portlet-section-text" />
+							styleClass="portlet-font" />
 
-						<h:outputText styleClass="table-titre portlet-form-label"
+						<h:outputText styleClass="portlet-form-label"
 							value="Numéro Avenant" />
 						<h:outputText
 							value="#{contratController.currentAvenantContratDto.numeroAvenant}"
-							styleClass="portlet-section-text" />
-						<h:outputText styleClass="table-titre portlet-form-label"
+							styleClass="portlet-font" />
+						<h:outputText styleClass="portlet-form-label"
 							value="Type de contrat" />
 						<h:outputText
 							value="#{contratController.currentContratDto.typeContratDto.libelleLong}"
-							styleClass="portlet-section-text" />
-						<h:outputText styleClass="table-titre portlet-form-label"
+							styleClass="portlet-font" />
+						<h:outputText styleClass="portlet-form-label"
 							value="Référence de contrat" />
 						<h:outputText
 							value="#{contratController.currentAvenantContratDto.referenceContrat}"
-							styleClass="portlet-section-text" />
-						<h:outputText styleClass="table-titre portlet-form-label"
+							styleClass="portlet-font" />
+						<h:outputText styleClass="portlet-form-label"
 							value="Date de début du contrat" />
 						<h:outputText
 							value="#{contratController.currentAvenantContratDto.dateDebutContrat.time}"
-							styleClass="portlet-section-text">
+							styleClass="portlet-font">
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"
 								locale="Locale.FRANCE" />
 						</h:outputText>
-						<h:outputText styleClass="table-titre portlet-form-label"
+						<h:outputText styleClass="portlet-form-label"
 							value="Date de fin du contrat" />
 						<h:outputText
 							value="#{contratController.currentAvenantContratDto.dateFinContrat.time}"
-							styleClass="portlet-section-text">
+							styleClass="portlet-font">
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"
 								locale="Locale.FRANCE" />
 						</h:outputText>
-						<h:outputText styleClass="table-titre portlet-form-label"
+						<h:outputText styleClass="portlet-form-label"
 							value="Date de signature du contrat" />
 						<h:outputText
 							value="#{contratController.currentAvenantContratDto.dateReferenceContratAvenant.time}"
-							styleClass="portlet-section-text">
+							styleClass="portlet-font">
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"
 								locale="Locale.FRANCE" />
 						</h:outputText>
-						<h:outputText styleClass="table-titre portlet-form-label"
+						<h:outputText styleClass="portlet-subsection-header"
 							value="Fonctions assurées" />
 						<h:outputText
 							value="#{contratController.currentAvenantContratDto.fonctionsAssurees}"
-							styleClass="portlet-section-text" />
-						<h:outputText styleClass="table-titre portlet-form-label"
+							styleClass="portlet-font" />
+						<h:outputText styleClass="portlet-form-label"
 							value="Equivalent grade" />
 						<h:outputText
 							value="#{contratController.currentAvenantContratDto.equivalentGradeDto.libelleEquivalentGrade}"
-							styleClass="portlet-section-text" />
-						<h:outputText styleClass="table-titre portlet-form-label"
+							styleClass="portlet-font" />
+						<h:outputText styleClass="portlet-form-label"
 							value="Equivalent catégorie" />
 						<h:outputText
 							value="#{contratController.currentAvenantContratDto.equivalentCategorieFPDto.codeEquivalentCategorieFP}"
-							styleClass="portlet-section-text" />
+							styleClass="portlet-font" />
 					</h:panelGrid>
 				</h:panelGroup>
 
 				<h:panelGroup
 					rendered="#{contratController.currentInformationsOccupationAffectationDto!= null}">
 					<h:panelGrid border="0" columns="1" cellpadding="10" width="100%"
-						styleClass="portlet-menu">
+						styleClass="portlet-subsection-header" >
 						<h:outputText value="Occupation"
-							styleClass="portlet-section-header" />
+							/>
 					</h:panelGrid>
 					<h:panelGroup>
 						<h:dataTable var="informationsOccupationAffectationDto"
 							value="#{contratController.currentInformationsOccupationAffectationDto}"
-							headerClass="esup-agent-portlet-datatable-header" width="100%">
+							columnClasses="list-column-center"
+							headerClass="portlet-table-header" rowClasses="portlet-font" 
+							width="100%">
 							<h:column>
 								<f:facet name="header">
 									<h:outputText value="n° poste" />
 								</f:facet>
 								<h:outputText
 									value="#{informationsOccupationAffectationDto.posteDto.numeroPoste}"
-									styleClass="portlet-section-text" />
+									styleClass="portlet-font" />
 							</h:column>
 							<h:column>
 								<f:facet name="header">
@@ -155,7 +158,7 @@
 								</f:facet>
 								<h:outputText
 									value="#{informationsOccupationAffectationDto.posteDto.numeroNational}"
-									styleClass="portlet-section-text" />
+									styleClass="portlet-font" />
 							</h:column>
 							<h:column>
 								<f:facet name="header">
@@ -165,14 +168,14 @@
 									<h:outputText value="du " styleClass="portlet-section-text" />
 									<h:outputText
 										value="#{informationsOccupationAffectationDto.dateDebut.time}"
-										styleClass="portlet-section-text">
+										styleClass="portlet-font">
 										<f:convertDateTime pattern="dd/MM/yyyy"
 											timeZone="Europe/Paris" locale="Locale.FRANCE" />
 									</h:outputText>
-									<h:outputText value=" au " styleClass="portlet-section-text" />
+									<h:outputText value=" au " styleClass="portlet-font" />
 									<h:outputText
 										value="#{informationsOccupationAffectationDto.dateFin.time}"
-										styleClass="portlet-section-text">
+										styleClass="portlet-font">
 										<f:convertDateTime pattern="dd/MM/yyyy"
 											timeZone="Europe/Paris" locale="Locale.FRANCE" />
 									</h:outputText>
@@ -185,41 +188,44 @@
 
 
 					<h:panelGrid border="0" columns="1" cellpadding="10" width="100%"
-						styleClass="portlet-menu">
+						styleClass="portlet-subsection-header">
 						<h:outputText value="Affectation"
-							styleClass="portlet-section-header" />
+							 />
 					</h:panelGrid>
 					<h:panelGroup>
 						<h:dataTable var="informationsOccupationAffectationDto"
-							value="#{contratController.currentInformationsOccupationAffectationDto}" width="100%">
+							value="#{contratController.currentInformationsOccupationAffectationDto}" columnClasses="list-column-center"
+							headerClass="portlet-table-header" rowClasses="portlet-font" 
+							width="100%">
 							<h:column>
 								<h:dataTable var="AffectationDto"
 									value="#{informationsOccupationAffectationDto.affectationDto}"
-									headerClass="esup-agent-portlet-datatable-header">
+									columnClasses="list-column-center"
+							headerClass="portlet-table-header" rowClasses="portlet-font">
 									<h:column>
 										<f:facet name="header">
 											<h:outputText value="Structure" />
 										</f:facet>
 										<h:outputText
 											value="#{AffectationDto.structureAffectationDto.libelleLongStructureAffectation}"
-											styleClass="portlet-section-text" />
+											styleClass="portlet-font" />
 									</h:column>
 									<h:column>
 										<f:facet name="header">
 											<h:outputText value="Période" />
 										</f:facet>
 										<h:panelGroup>
-											<h:outputText value="du " styleClass="portlet-section-text" />
+											<h:outputText value="du " styleClass="portlet-font" />
 											<h:outputText
 												value="#{AffectationDto.dateDebutAffectation.time}"
-												styleClass="portlet-section-text">
+												styleClass="portlet-font">
 												<f:convertDateTime pattern="dd/MM/yyyy"
 													timeZone="Europe/Paris" locale="Locale.FRANCE" />
 											</h:outputText>
 											<h:outputText value=" au " styleClass="portlet-section-text" />
 											<h:outputText
 												value="#{AffectationDto.dateFinAffectation.time}"
-												styleClass="portlet-section-text">
+												styleClass="portlet-font">
 												<f:convertDateTime pattern="dd/MM/yyyy"
 													timeZone="Europe/Paris" locale="Locale.FRANCE" />
 											</h:outputText>
@@ -232,7 +238,7 @@
 										</f:facet>
 										<h:outputText
 											value="#{informationsOccupationAffectationDto.posteDto.numeroPoste}"
-											styleClass="portlet-section-text" />
+											styleClass="portlet-font" />
 									</h:column>
 
 
@@ -242,7 +248,7 @@
 										</f:facet>
 										<h:outputText
 											value="#{affectationDto.structureAffectationDto.quotite}"
-											styleClass="pportlet-section-text" />
+											styleClass="portlet-font" />
 									</h:column>
 
 
@@ -262,7 +268,7 @@
 	<h:panelGroup rendered="#{sessionController.currentUser == null}">
 		<e:paragraph value="#{msgs['CONTRAT.MSG.UNAUTHENTICATE']}" />
 	</h:panelGroup>
-
+	</t:div>
 	<%
 		/* @include file="_debug.jsp" */
 	%>

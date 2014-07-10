@@ -7,7 +7,7 @@ package org.esupportail.esupAgent.dao;
 import java.util.List;
 
 import org.esupportail.esupAgent.domain.beans.User;
-import org.esupportail.esupAgent.domain.beans.VersionManager;
+import org.esupportail.esupAgent.domain.beans.VersionManager ;
 import org.esupportail.commons.dao.AbstractJdbcJndiHibernateDaoService;
 import org.esupportail.commons.dao.HibernateFixedQueryPaginator;
 import org.esupportail.commons.dao.HqlUtils;
@@ -130,7 +130,7 @@ implements DaoService, InitializingBean {
 		return versionManagers.get(0);
 		*/
 		VersionManager versionManager=new VersionManager();
-		versionManager.setVersion("0.0.4");
+		versionManager.setVersion("0.0.6");
 		return versionManager;
 	}
 

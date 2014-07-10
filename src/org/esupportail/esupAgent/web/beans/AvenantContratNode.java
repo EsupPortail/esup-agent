@@ -43,16 +43,12 @@ public class AvenantContratNode extends TreeNodeBase {
 					+ " au "
 					+ sdf.format(avenantContratDto.getDateFinContrat()
 							.getTime())
-					+ " : "
-					+ avenantContratDto.getEquivalentGradeDto()
-							.getLibelleEquivalentGrade());
+					);
 		} else {
 			super.setDescription("depuis le "
 					+ sdf.format(avenantContratDto.getDateDebutContrat()
 							.getTime())
-					+ " : "
-					+ avenantContratDto.getEquivalentGradeDto()
-							.getLibelleEquivalentGrade());
+					);
 		}
 		super.setLeaf(false);
 
