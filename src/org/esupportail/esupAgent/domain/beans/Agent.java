@@ -611,6 +611,7 @@ public class Agent {
 				
 				CarriereDto_V2  elementCarriereFinalDto_V2 = carriereDto_V2[0]; 
 				ElementCarriereDto[] lstElementCarriereDto = elementCarriereFinalDto_V2.getElementCarriereDto();
+				if (lstElementCarriereDto == null) return null;
 				Comparator<ElementCarriereDto> eltComparaison = new ElementCarriereSort();
 				Arrays.sort(lstElementCarriereDto, eltComparaison);
 				
