@@ -131,9 +131,6 @@ public class CarriereController extends AbstractContextAwareController {
 												.toString());
 						logger.debug(elementCarriereDto
 								.getNumeroSequenceElement().toString());
-						logger.debug("Date effet "
-								+ sdf.format(carriereDto.getDateDebutCarriere()
-										.getTime()));
 					}
 
 				}
