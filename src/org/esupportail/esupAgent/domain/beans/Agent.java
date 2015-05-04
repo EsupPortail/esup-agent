@@ -334,16 +334,16 @@ public class Agent {
 
 			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
-				logger.info("erreur" + e.getMessage());
+				logger.info("erreur Service" + e.getMessage());
 			} catch (HarpegeTechniqueException e) {
 				// TODO Auto-generated catch block
-				logger.info("erreur" + e.getMessage());
+				logger.info("erreur technique" + e.getMessage());
 			} catch (HarpegeFonctionnelleException e) {
 				// TODO Auto-generated catch block
-				logger.info("erreur" + e.getMessage());
+				logger.info("erreur fonctionnelle" + e.getMessage());
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
-				logger.info("erreur" + e.getMessage());
+				logger.info("erreur remoteexception" + e.getMessage());
 			}
 			/*logger.info("Agent :: nom "
 					+ consulterEtatCivil.getIndividuReponseEtatCivil_V2()
