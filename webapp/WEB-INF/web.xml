@@ -175,18 +175,8 @@
 	<servlet> 
 		<servlet-name>esup-agent</servlet-name>
 		<servlet-class>
-			org.apache.pluto.core.PortletServlet
+			org.apache.pluto.container.driver.PortletServlet
 		</servlet-class>
-		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>
-				org.apache.portals.bridges.portletfilter.FilterPortlet
-			</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portlet-guid</param-name>
-			<param-value>esup-agent.esup-agent</param-value>
-		</init-param>
 		<init-param>
 			<param-name>portlet-name</param-name>
 			<param-value>esup-agent</param-value>
