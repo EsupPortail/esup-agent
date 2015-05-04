@@ -613,7 +613,7 @@ public class Agent {
 				Comparator<ElementCarriereDto> eltComparaison = new ElementCarriereSort();
 				Arrays.sort(lstElementCarriereDto, eltComparaison);
 				
-				logger.debug("indice : " + lstElementCarriereDto[lstElementCarriereDto.length-1].getIndiceDto().getIndiceNouveauMajore());
+				//logger.debug("indice : " + lstElementCarriereDto[lstElementCarriereDto.length-1].getIndiceDto().getIndiceNouveauMajore());
 				
 				//return (carriereDto_V2[carriereDto_V2.length - 1]
 				//		.getElementCarriereDto())[carriereDto_V2[carriereDto_V2.length - 1]
