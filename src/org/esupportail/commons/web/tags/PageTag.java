@@ -187,8 +187,6 @@ public class PageTag extends UIComponentBodyTag {
         // set the locale of the view
         UIViewRoot view = (UIViewRoot) component;
         view.setLocale(locale);
-        Config.set((ServletRequest) getFacesContext().getExternalContext().getRequest(),
-                   Config.FMT_LOCALE, locale);
         
         component.setRendered(true);
         
