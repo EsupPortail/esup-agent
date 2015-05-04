@@ -1186,6 +1186,9 @@ public class Agent {
 
 	public void modifierCoordonneesPersonnelles(String telephonePortable,String email) {		
 		if (telephonePortable != null || email != null) {
+			logger.info("-----------------------------");
+			logger.info("Telephone" + telephonePortable);
+			logger.info("-----------------------------");
 			ModificationCoordonneesPersonnellesReponseWSDto modificationCoordonneesPersonnellesReponse = new ModificationCoordonneesPersonnellesReponseWSDto();
 			DossierRhPersonnelWebServiceServiceLocator dossierRHPersonnelWSServiceLocator = new DossierRhPersonnelWebServiceServiceLocator();
 			dossierRHPersonnelWSServiceLocator
