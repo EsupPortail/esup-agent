@@ -12,10 +12,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.InformationsContratsDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.AffectationDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.InformationsOccupationAffectationDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.AvenantContratDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsContratsDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.AffectationDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsOccupationAffectationDto;
 
 import org.apache.myfaces.custom.tree2.HtmlTree;
 import org.apache.myfaces.custom.tree2.TreeModelBase;

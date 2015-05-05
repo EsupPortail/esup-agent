@@ -10,9 +10,9 @@ import javax.xml.rpc.ServiceException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
-import gouv.education.harpege.transverse.dto.refGeo.VoirieReponseWSDto;
-import gouv.education.harpege.transverse.exception.HarpegeFonctionnelleException;
-import gouv.education.harpege.transverse.exception.HarpegeTechniqueException;
+import gouv.education.harpege.webservice.client.referentielGeographique.VoirieReponseWSDto;
+import gouv.education.harpege.webservice.client.dossierRhPersonnel.HarpegeFonctionnelleException;
+import gouv.education.harpege.webservice.client.dossierRhPersonnel.HarpegeTechniqueException;
 import gouv.education.harpege.webservice.client.referentielGeographique.ReferentielGeographiqueSoapBindingStub;
 import gouv.education.harpege.webservice.client.referentielGeographique.ReferentielGeographiqueWebServiceServiceLocator;
 

@@ -3,9 +3,12 @@
  */
 package org.esupportail.esupAgent.domain.beans.comparators;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.InformationsContratsDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.AffectationDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.InformationsOccupationAffectationDto;
+
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsContratsDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsOccupationAffectationDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.AffectationDto;
+
+
 
 import java.util.Comparator;
 

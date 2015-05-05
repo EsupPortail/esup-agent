@@ -1,7 +1,7 @@
 package org.esupportail.esupAgent.domain.beans.comparators;
 
 import java.util.Comparator;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.AvenantContratDto;
 
 public class AvenantContratSort implements Comparator<AvenantContratDto> {
 

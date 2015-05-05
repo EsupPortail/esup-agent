@@ -7,10 +7,6 @@ package org.esupportail.esupAgent.domain;
 import org.esupportail.commons.services.application.ApplicationService;
 import org.esupportail.commons.utils.BeanUtils;
 
-import gouv.education.harpege.transverse.exception.HarpegeFonctionnelleException;
-import gouv.education.harpege.transverse.exception.HarpegeTechniqueException;
-
-import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.xml.rpc.ServiceException;

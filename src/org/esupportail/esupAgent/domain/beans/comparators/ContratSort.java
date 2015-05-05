@@ -1,6 +1,6 @@
 package org.esupportail.esupAgent.domain.beans.comparators;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.InformationsContratsDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsContratsDto;
 
 import java.util.Comparator;
 

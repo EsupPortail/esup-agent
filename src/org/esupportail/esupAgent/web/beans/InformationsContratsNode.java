@@ -2,8 +2,7 @@ package org.esupportail.esupAgent.web.beans;
 
 import java.text.SimpleDateFormat;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.InformationsContratsDto;
-
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsContratsDto;
 import org.apache.myfaces.custom.tree2.TreeNodeBase;
 
 public class InformationsContratsNode extends TreeNodeBase {

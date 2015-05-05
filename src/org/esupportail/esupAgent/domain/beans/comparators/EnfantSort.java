@@ -2,8 +2,8 @@ package org.esupportail.esupAgent.domain.beans.comparators;
 
 import java.util.Comparator;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
-import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationSituationFamiliale.EnfantDto_V2;
+
+import gouv.education.harpege.webservice.client.dossierRhPersonnel.EnfantDto_V2;
 
 public class EnfantSort implements Comparator<EnfantDto_V2> {
 

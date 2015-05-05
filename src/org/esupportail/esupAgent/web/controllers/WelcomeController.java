@@ -9,12 +9,13 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
-import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonneesPersonnelles.AdresseDto;
-import gouv.education.harpege.transverse.dto.DossierRhPerso.ConsultationCoordonneesPersonnelles.ConsultationCoordonneesPersonnellesDto;
+import gouv.education.harpege.webservice.client.dossierRhPersonnel.AdresseDto;
+import gouv.education.harpege.webservice.client.dossierRhPersonnel.ConsultationCoordonneesPersonnellesDto;
 import gouv.education.harpege.transverse.dto.DossierRhPerso.ModificationAdressePersonnelle.AdressePersonnelleDto;
-import gouv.education.harpege.transverse.dto.DossierRhPerso.ModificationAdressePersonnelle.PaysDto;
-import gouv.education.harpege.transverse.dto.DossierRhPerso.ModificationAdressePersonnelle.VoieDto;
-import gouv.education.harpege.transverse.dto.refGeo.VoirieDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ModificationAdressePersonnelle.PaysModifPerspDto;
+import gouv.education.harpege.transverse.dto.DossierRhPerso.ModificationAdressePersonnelle.VoieModifPerspDto;
+import gouv.education.harpege.webservice.client.referentielGeographique.VoirieDto;
+
 
 import org.esupportail.commons.services.ldap.LdapUserService;
 import org.esupportail.commons.services.logging.Logger;
@@ -294,7 +295,7 @@ public class WelcomeController extends AbstractContextAwareController {
 				.getCurrentUser().getAgent().getSupannEmpId());
 		adressePersonnelleDto.setNumeroVoie(this.numeroVoie);
 		adressePersonnelleDto.setBisTer(bisTer);
-		adressePersonnelleDto.setVoie(new VoieDto());
+		adressePersonnelleDto.setVoie(new VoieModifPerspDto());
 		adressePersonnelleDto.getVoie().setCodeVoie(this.codeVoie);
 		adressePersonnelleDto.setNomVoie(this.nomVoie);
 		adressePersonnelleDto.setHabitantChez(this.habitantChez);
@@ -303,7 +304,7 @@ public class WelcomeController extends AbstractContextAwareController {
 		adressePersonnelleDto.setTelephoneDomicile(this.telephoneDomicile);
 		adressePersonnelleDto.setNumeroFax(this.numeroFax);
 		adressePersonnelleDto.setTemoinAdressePrincipale(this.getTemoinAdressePrincipale());
-		adressePersonnelleDto.setPays(new PaysDto());
+		adressePersonnelleDto.setPays(new PaysModifPerspDto());
 		adressePersonnelleDto.getPays().setCodePays(this.getCodePays());
 
 		getSessionController().getCurrentUser().getAgent().modifierAdressePersonnelle(adressePersonnelleDto);

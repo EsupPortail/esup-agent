@@ -2,9 +2,9 @@ package org.esupportail.esupAgent.web.beans;
 
 import java.text.SimpleDateFormat;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.InformationsContratsDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.InformationsOccupationAffectationDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.AvenantContratDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsContratsDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsOccupationAffectationDto;
 
 import org.apache.myfaces.custom.tree2.TreeNodeBase;
 

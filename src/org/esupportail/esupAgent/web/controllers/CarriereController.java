@@ -9,13 +9,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.BapReferensDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.BapReferensDto_V2;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto_V2;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementCarriereDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationContrats.AvenantContratDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.AffectationRechercheDto;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationInformationOccupationAffectation.InformationsOccupationAffectationDto;
+
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.CarriereDto_V2;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementCarriereDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.AvenantContratDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.AffectationRechercheDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsOccupationAffectationDto;
 
 import org.apache.myfaces.custom.tree2.HtmlTree;
 import org.apache.myfaces.custom.tree2.TreeModelBase;

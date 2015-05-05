@@ -2,8 +2,8 @@ package org.esupportail.esupAgent.web.beans;
 
 import java.text.SimpleDateFormat;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto_V2;
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.ElementCarriereDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.CarriereDto_V2;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementCarriereDto;
 
 import org.apache.myfaces.custom.tree2.TreeNodeBase;
 

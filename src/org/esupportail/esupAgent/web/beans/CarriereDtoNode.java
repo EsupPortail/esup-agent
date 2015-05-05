@@ -1,6 +1,6 @@
 package org.esupportail.esupAgent.web.beans;
 
-import gouv.education.harpege.transverse.dto.DossierRhAdministratif.ConsultationElementsCarriere.CarriereDto_V2;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.CarriereDto_V2;
 
 import org.apache.myfaces.custom.tree2.TreeNodeBase;
 
