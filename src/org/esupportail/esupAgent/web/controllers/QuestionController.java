@@ -240,6 +240,7 @@ public class QuestionController extends AbstractContextAwareController {
 //		}
 		try {
 			String subject = "[esup-agent] " + getCurrentUser().getDisplayName()
+								+ " (" + getDisplayUser().getAgent().getSupannEmpId() + ")"
 								+ " : " + titre;
 			if (destinataires==null || destinataires.length == 0) {
 				String contact = ((AgentApplicationServiceImpl) getApplicationService()).getConfigAgent().getContactHarpege();
