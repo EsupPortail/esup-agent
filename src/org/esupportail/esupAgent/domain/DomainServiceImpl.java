@@ -53,6 +53,11 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * The LDAP attribute that contains the display name.
 	 */
 	private String displayNameLdapAttribute;
+	
+	/**
+	 * The LDAP attribute that contains the mail.
+	 */
+	private String mailLdapAttribute;
 
 	/**
 	 * A logger.
@@ -118,6 +123,10 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 			user.setAdmin(true);
 		}
 
+		List<String> mailLdapAttributes = ldapUser.getAttributes().get(mailLdapAttribute);
+		if (mailLdapAttributes != null) {
+			user.setMail(mailLdapAttributes.get(0));
+		}
 		
 
 		String supannEmpId = ldapUser.getAttribute(((AgentApplicationServiceImpl) getApplicationService())
@@ -356,6 +365,14 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 */
 	public void setLdapUserService(final LdapUserService ldapUserService) {
 		this.ldapUserService = ldapUserService;
+	}
+
+	public String getMailLdapAttribute() {
+		return mailLdapAttribute;
+	}
+
+	public void setMailLdapAttribute(String mailLdapAttribute) {
+		this.mailLdapAttribute = mailLdapAttribute;
 	}
 
 }

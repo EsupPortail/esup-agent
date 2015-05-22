@@ -17,7 +17,7 @@ import org.esupportail.commons.services.ldap.LdapUser;
 import org.esupportail.commons.services.ldap.LdapUserService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.services.smtp.SmtpService;
+import org.esupportail.commons.services.smtp.SimpleSmtpServiceImpl;
 import org.esupportail.commons.services.smtp.SmtpUtils;
 import org.esupportail.esupAgent.domain.beans.ContactMail;
 import org.esupportail.esupAgent.domain.beans.EnvoiMail;
@@ -95,20 +95,13 @@ public class QuestionController extends AbstractContextAwareController {
 		this.titre = titre;
 	}
 
-	private SmtpService smtpService;
-
-	/**
-	 * @return the smtpService
-	 */
-	public SmtpService getSmtpService() {
-		return smtpService;
-	}
+	private SimpleSmtpServiceImpl smtpService;
 
 	/**
 	 * @param smtpService
 	 *            the smtpService to set
 	 */
-	public void setSmtpService(SmtpService smtpService) {
+	public void setSmtpService(SimpleSmtpServiceImpl smtpService) {
 		this.smtpService = smtpService;
 	}
 
@@ -253,7 +246,7 @@ public class QuestionController extends AbstractContextAwareController {
 				destinataires = new InternetAddress[] { new InternetAddress(contact) };
 			}
 				logger.info(destinataires[0].toString());
-				this.smtpService.sendtocc(destinataires, null, null, subject, null, message, null);
+				sendEmail(new InternetAddress(getCurrentUser().getMail()), destinataires, subject, message);
 			FacesMessage fm = new FacesMessage("Le message a \u00E9t\u00E9 envoy\u00E9");
             FacesContext.getCurrentInstance().addMessage(null,fm);
 		} catch (AddressException e) {
@@ -263,6 +256,15 @@ public class QuestionController extends AbstractContextAwareController {
 		return "navigationQuestion";
 
 	}
+
+    
+	public void sendEmail(InternetAddress from, InternetAddress[] tos, String subject, String textBody) {
+		SmtpUtils.sendEmailtocc(smtpService.getServers(),
+					from, tos, null, null,
+					subject, null, textBody,
+					null, smtpService.getCharset());
+	}
+
 	
 	public void validateMessage(FacesContext ctx, UIComponent componentToValidate, Object obj)
 	   throws ValidatorException {

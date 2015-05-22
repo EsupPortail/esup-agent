@@ -30,6 +30,11 @@ public class User implements Serializable {
     private String displayName;
     
     /**
+	 * Mail of the user.
+	 */
+    private String mail;
+    
+    /**
 	 * True for administrators.
 	 */
     private boolean admin;
@@ -150,6 +155,13 @@ public class User implements Serializable {
 	public void setAgent(Agent agent) {
 		this.agent = agent;
 	}
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
     
+	
 
 }
