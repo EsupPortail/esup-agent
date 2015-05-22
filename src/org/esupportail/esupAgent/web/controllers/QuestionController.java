@@ -246,14 +246,14 @@ public class QuestionController extends AbstractContextAwareController {
 //			logger.info(j + " : " + destinataires[j].getAddress());
 //		}
 		try {
+			String subject = "[esup-agent] " + getCurrentUser().getDisplayName()
+								+ " : " + titre;
 			if (destinataires==null || destinataires.length == 0) {
 				String contact = ((AgentApplicationServiceImpl) getApplicationService()).getConfigAgent().getContactHarpege();
 				destinataires = new InternetAddress[] { new InternetAddress(contact) };
 			}
 				logger.info(destinataires[0].toString());
-				this.smtpService.sendtocc(destinataires, null, null,
-						"[esup-agent] " + getCurrentUser().getDisplayName()
-								+ " : " + titre, null, message, null);
+				this.smtpService.sendtocc(destinataires, null, null, subject, null, message, null);
 			FacesMessage fm = new FacesMessage("Le message a \u00E9t\u00E9 envoy\u00E9");
             FacesContext.getCurrentInstance().addMessage(null,fm);
 		} catch (AddressException e) {
