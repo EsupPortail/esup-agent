@@ -256,7 +256,7 @@ public class QuestionController extends AbstractContextAwareController {
 						((AgentApplicationServiceImpl) getApplicationService())
 								.getConfigAgent().getContactHarpege()),
 						"[esup-agent] " + getCurrentUser().getDisplayName()
-								+ " : " + titre, message, null);
+								+ " : " + titre, null, message);
 			}
 			FacesMessage fm = new FacesMessage("Le message a \u00E9t\u00E9 envoy\u00E9");
             FacesContext.getCurrentInstance().addMessage(null,fm);
