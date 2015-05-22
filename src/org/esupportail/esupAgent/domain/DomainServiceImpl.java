@@ -9,13 +9,10 @@ import org.esupportail.commons.utils.BeanUtils;
 
 import java.util.List;
 
-import javax.xml.rpc.ServiceException;
-
 import org.esupportail.esupAgent.dao.DaoService;
 import org.esupportail.esupAgent.domain.beans.Agent;
 import org.esupportail.esupAgent.domain.beans.User;
 import org.esupportail.esupAgent.domain.beans.VersionManager;
-import org.esupportail.esupAgent.domain.beans.config.ConfigAgent;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
