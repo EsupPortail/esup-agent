@@ -7,11 +7,11 @@ import gouv.education.harpege.webservice.client.dossierRhAdministratif.DonneesPo
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.DonneesTableauxAvancementDto;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.DonneesTableauxAvancementReponseWSDto;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.CarriereDto;
-import gouv.education.harpege.webservice.client.dossierRhAdministratif.CarriereDto_V2;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.CarriereDto_V4;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementsCarriereReponseWSDto;
-import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementsCarriereReponseWSDto_V2;
-import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementCarriereFinalDto_V2;
-import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementCarriereDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementsCarriereReponseWSDto_V4;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementCarriereFinalDto_V4;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementCarriereDto_V3;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.AvenantContratDto;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsContratsDto;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsContratsReponseWSDto;
@@ -585,12 +585,12 @@ public class Agent {
 					.setdossierRhAdministratifEndpointAddress(wsdl_url_dossier_rh_administratif);
 
 			Calendar dateActuel = new GregorianCalendar();
-			ElementsCarriereReponseWSDto_V2 elementsCarriereReponseWSDto_V2 = null;
+			ElementsCarriereReponseWSDto_V4 elementsCarriereReponseWSDto = null;
 			if (wsdl_anonymous) {
 				dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
 						.getdossierRhAdministratif();
-				elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebService
-						.consultationElementsCarriere_V2(supannEmpId,
+				elementsCarriereReponseWSDto = dossierRhAdministratifWebService
+						.consultationElementsCarriere_V4(supannEmpId,
 								dateActuel);
 			} else {
 				dossierRhAdministratifWebServiceStub = (DossierRhAdministratifSoapBindingStub) dossierRhAdministratifWebServiceServiceLocator
@@ -598,27 +598,27 @@ public class Agent {
 				dossierRhAdministratifWebServiceStub.setUsername(wsdl_usr_name);
 				dossierRhAdministratifWebServiceStub
 						.setPassword(wsdl_usr_password);
-				elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebServiceStub
-						.consultationElementsCarriere_V2(supannEmpId,
+				elementsCarriereReponseWSDto = dossierRhAdministratifWebServiceStub
+						.consultationElementsCarriere_V4(supannEmpId,
 								dateActuel);
 			}
 
-			ElementCarriereFinalDto_V2 elementsCarriereFinalDto_V2 = elementsCarriereReponseWSDto_V2
-					.getElementsCarriereFinalDto_V2();
-			if (elementsCarriereFinalDto_V2 != null) {
-				CarriereDto_V2[] carriereDto_V2 = elementsCarriereFinalDto_V2
+			ElementCarriereFinalDto_V4 elementsCarriereFinalDto = elementsCarriereReponseWSDto
+					.getElementsCarriereFinalDto_V4();
+			if (elementsCarriereFinalDto != null) {
+				CarriereDto_V4[] carriereDto = elementsCarriereFinalDto
 						.getElementsCarriereDto();
 				
-				CarriereDto_V2  elementCarriereFinalDto_V2 = carriereDto_V2[0]; 
-				ElementCarriereDto[] lstElementCarriereDto = elementCarriereFinalDto_V2.getElementCarriereDto();
+				CarriereDto_V4  elementCarriereFinalDto = carriereDto[0]; 
+				ElementCarriereDto_V3[] lstElementCarriereDto = elementCarriereFinalDto.getElementCarriereDto();
 				if (lstElementCarriereDto == null) return null;
-				Comparator<ElementCarriereDto> eltComparaison = new ElementCarriereSort();
+				Comparator<ElementCarriereDto_V3> eltComparaison = new ElementCarriereSort();
 				Arrays.sort(lstElementCarriereDto, eltComparaison);
 				
 				//logger.debug("indice : " + lstElementCarriereDto[lstElementCarriereDto.length-1].getIndiceDto().getIndiceNouveauMajore());
 				
-				//return (carriereDto_V2[carriereDto_V2.length - 1]
-				//		.getElementCarriereDto())[carriereDto_V2[carriereDto_V2.length - 1]
+				//return (carriereDto[carriereDto.length - 1]
+				//		.getElementCarriereDto())[carriereDto[carriereDto.length - 1]
 				//		.getElementCarriereDto().length - 1].getIndiceDto()
 				//		.getIndiceNouveauMajore();
 				return lstElementCarriereDto[lstElementCarriereDto.length-1].getIndiceDto().getIndiceNouveauMajore();
@@ -754,9 +754,9 @@ public class Agent {
 		this.consulterDiplomes = consulterDiplomes;
 	}
 
-	public CarriereDto_V2[] getConsulterCarriere() {
-		ElementsCarriereReponseWSDto_V2 elementsCarriereReponseWSDto_V2;
-		CarriereDto_V2[] lstCarriereDto_V2 = null;
+	public CarriereDto_V4[] getConsulterCarriere() {
+		ElementsCarriereReponseWSDto_V4 elementsCarriereReponseWSDto;
+		CarriereDto_V4[] lstCarriereDto = null;
 		try {
 			dossierRhAdministratifWebServiceServiceLocator = new DossierRhAdministratifWebServiceServiceLocator();
 			dossierRhAdministratifWebServiceServiceLocator
@@ -766,28 +766,28 @@ public class Agent {
 				dossierRhAdministratifWebService = dossierRhAdministratifWebServiceServiceLocator
 						.getdossierRhAdministratif();
 
-				elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebService
-						.consultationElementsCarriere_V2(supannEmpId, null);
+				elementsCarriereReponseWSDto = dossierRhAdministratifWebService
+						.consultationElementsCarriere_V4(supannEmpId, null);
 			} else {
 				dossierRhAdministratifWebServiceStub = (DossierRhAdministratifSoapBindingStub) dossierRhAdministratifWebServiceServiceLocator
 						.getdossierRhAdministratif();
 				dossierRhAdministratifWebServiceStub.setUsername(wsdl_usr_name);
 				dossierRhAdministratifWebServiceStub
 						.setPassword(wsdl_usr_password);
-				elementsCarriereReponseWSDto_V2 = dossierRhAdministratifWebServiceStub
-						.consultationElementsCarriere_V2(supannEmpId, null);
+				elementsCarriereReponseWSDto = dossierRhAdministratifWebServiceStub
+						.consultationElementsCarriere_V4(supannEmpId, null);
 			}
 
-			if (elementsCarriereReponseWSDto_V2
-					.getElementsCarriereFinalDto_V2() != null) {
-				lstCarriereDto_V2 = elementsCarriereReponseWSDto_V2
-						.getElementsCarriereFinalDto_V2()
+			if (elementsCarriereReponseWSDto
+					.getElementsCarriereFinalDto_V4() != null) {
+				lstCarriereDto = elementsCarriereReponseWSDto
+						.getElementsCarriereFinalDto_V4()
 						.getElementsCarriereDto();
-				logger.debug(Integer.toString(lstCarriereDto_V2.length));
+				logger.debug(Integer.toString(lstCarriereDto.length));
 			} else {
 				logger.debug(supannEmpId + " : aucun élément de carrière");
 			}
-			return lstCarriereDto_V2;
+			return lstCarriereDto;
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

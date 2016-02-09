@@ -10,8 +10,8 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 
 
-import gouv.education.harpege.webservice.client.dossierRhAdministratif.CarriereDto_V2;
-import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementCarriereDto;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.CarriereDto_V4;
+import gouv.education.harpege.webservice.client.dossierRhAdministratif.ElementCarriereDto_V3;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.AvenantContratDto;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.AffectationRechercheDto;
 import gouv.education.harpege.webservice.client.dossierRhAdministratif.InformationsOccupationAffectationDto;
@@ -38,9 +38,9 @@ public class CarriereController extends AbstractContextAwareController {
 
 	private TreeModelBase carriereTree;
 
-	private CarriereDto_V2 currentCarriereDto;
+	private CarriereDto_V4 currentCarriereDto;
 
-	private ElementCarriereDto currentElementCarriereDto;
+	private ElementCarriereDto_V3 currentElementCarriereDto;
 
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -93,15 +93,15 @@ public class CarriereController extends AbstractContextAwareController {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		TreeNode rootNode = new TreeNodeBase("root", "", "root", false);
 		TreeNodeBase treeNodeBase;
-		ElementCarriereDto[] lstElementCarriereDto;
-		Comparator<ElementCarriereDto> eltComparaison = new ElementCarriereSort();
+		ElementCarriereDto_V3[] lstElementCarriereDto;
+		Comparator<ElementCarriereDto_V3> eltComparaison = new ElementCarriereSort();
 
 		if (!isPageAuthorized()) {
 			addUnauthorizedActionMessage();
 			return null;
 		}
 
-		CarriereDto_V2[] carriere = getDisplayUser().getAgent().getConsulterCarriere();
+		CarriereDto_V4[] carriere = getDisplayUser().getAgent().getConsulterCarriere();
 		if (carriere != null) {
 
 			logger
@@ -111,7 +111,7 @@ public class CarriereController extends AbstractContextAwareController {
 				currentCarriereDto = carriere[0];
 			}
 
-			for (CarriereDto_V2 carriereDto : carriere) {
+			for (CarriereDto_V4 carriereDto : carriere) {
 				logger.debug("TYPE POPULATION "
 						+ carriereDto.getTypePopulationDto()
 								.getTemoinEnseignant());
@@ -119,7 +119,7 @@ public class CarriereController extends AbstractContextAwareController {
 				lstElementCarriereDto = carriereDto.getElementCarriereDto();
 				Arrays.sort(lstElementCarriereDto, eltComparaison);
 
-				for (ElementCarriereDto elementCarriereDto : lstElementCarriereDto) {
+				for (ElementCarriereDto_V3 elementCarriereDto : lstElementCarriereDto) {
 					if (elementCarriereDto.getDateEffetElementsCarriere()
 							.before(Calendar.getInstance())) {
 						treeNodeBase.getChildren().add(
@@ -168,7 +168,7 @@ public class CarriereController extends AbstractContextAwareController {
 	/**
 	 * @return the currentCarriereDto
 	 */
-	public CarriereDto_V2 getCurrentCarriereDto() {
+	public CarriereDto_V4 getCurrentCarriereDto() {
 		return currentCarriereDto;
 	}
 
@@ -176,14 +176,14 @@ public class CarriereController extends AbstractContextAwareController {
 	 * @param currentCarriereDto
 	 *            the currentCarriereDto to set
 	 */
-	public void setCurrentCarriereDto(CarriereDto_V2 currentCarriereDto) {
+	public void setCurrentCarriereDto(CarriereDto_V4 currentCarriereDto) {
 		this.currentCarriereDto = currentCarriereDto;
 	}
 
 	/**
 	 * @return the currentElementCarriereDto
 	 */
-	public ElementCarriereDto getCurrentElementCarriereDto() {
+	public ElementCarriereDto_V3 getCurrentElementCarriereDto() {
 		// logger.info(currentElementCarriereDto.getCorpsDto().getCodeCorps());
 		// logger.info(currentCarriereDto.getTypePopulationDto().getLibelleLongTypePopulation());
 		
@@ -195,7 +195,7 @@ public class CarriereController extends AbstractContextAwareController {
 	 *            the currentElementCarriereDto to set
 	 */
 	public void setCurrentElementCarriereDto(
-			ElementCarriereDto currentElementCarriereDto) {
+			ElementCarriereDto_V3 currentElementCarriereDto) {
 		this.currentElementCarriereDto = currentElementCarriereDto;
 	}
 
