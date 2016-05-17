@@ -53,7 +53,7 @@ public class Avancement {
 			dateDernierChangementEstFuture = !d.before(Calendar.getInstance());		
 		}
 		try {
-			echelonDernierChangement = Integer.parseInt(da.getEchelonFuturDto().getCodeEchelonFutur()) - 1;
+			echelonDernierChangement = Integer.parseInt(da.getEchelonFuturDto().getCodeEchelonFutur());
 		} catch (NumberFormatException e) {			
 		}	
 	}
