@@ -54,7 +54,7 @@
 				</h:panelGrid>
 				<h:panelGrid border="0" columns="2" cellspacing="10" cellpadding="2">
 					<h:outputText styleClass="portlet-form-label"
-						value="Numéro Harpege" />
+						value="NumÃ©ro Harpege" />
 					<h:outputText
 						value="#{welcomeController.displayUser.agent.supannEmpId}"
 						styleClass="portlet-font" />
@@ -337,21 +337,21 @@
 
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Année" />
+							<h:outputText value="AnnÃ©e" />
 						</f:facet>
 
-						<h:outputText value="#{diplome.anneeDiplome+1900}" />
+						<h:outputText value="#{diplome.anneeDiplome}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Diplôme" />
+							<h:outputText value="DiplÃ´me" />
 						</f:facet>
 
 						<h:outputText value="#{diplome.diplomeDto.libelleLong}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Lieu du diplôme" />
+							<h:outputText value="Lieu du diplÃ´me" />
 						</f:facet>
 
 						<h:outputText value="#{diplome.lieuDiplome}" />
@@ -373,7 +373,7 @@
 
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Date de début" />
+							<h:outputText value="Date de dÃ©but" />
 						</f:facet>
 
 						<h:outputText value="#{position.dateDebut.time}">
