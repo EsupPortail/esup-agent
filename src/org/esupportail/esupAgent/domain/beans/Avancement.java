@@ -34,9 +34,9 @@ public class Avancement {
 		reliquatAnciennete = "O".equals(da.getReliquatAnciennete());
 		
 		try {
-			float temps1 = da.getTempsPassageRecalculeDto().getDureeAncienneteJours() * 12 + // !! le WS inverse jours et annees !!
+			float temps1 = da.getTempsPassageRecalculeDto().getDureeAncienneteAnnee() * 12 + // !! le WS inverse jours et annees !!
 					da.getTempsPassageRecalculeDto().getDureeAncienneteMois() +
-					(float) da.getTempsPassageRecalculeDto().getDureeAncienneteAnnee() / 31; // !! le WS inverse jours et annees !!
+					(float) da.getTempsPassageRecalculeDto().getDureeAncienneteJours() / 31; // !! le WS inverse jours et annees !!
 			float temps2 = da.getTempsPassageMoyenDto().getDureeAncienneteAnnee() * 12 +
 					da.getTempsPassageMoyenDto().getDureeAncienneteMois();
 			moisAvantProchainChangementPrevisionnelMin = Math.round(Math.min(temps1, temps2));
@@ -46,9 +46,9 @@ public class Avancement {
 		{
 			Calendar d = da.getDatePrevisionnelle();
 			d.clone();
-			d.add(Calendar.YEAR, -da.getTempsPassageRecalculeDto().getDureeAncienneteJours()); // !! le WS inverse jours et annees !!
+			d.add(Calendar.YEAR, -da.getTempsPassageRecalculeDto().getDureeAncienneteAnnee()); // !! le WS inverse jours et annees !!
 			d.add(Calendar.MONTH, -da.getTempsPassageRecalculeDto().getDureeAncienneteMois());
-			d.add(Calendar.DAY_OF_MONTH, -da.getTempsPassageRecalculeDto().getDureeAncienneteAnnee()); // !! le WS inverse jours et annees !!
+			d.add(Calendar.DAY_OF_MONTH, -da.getTempsPassageRecalculeDto().getDureeAncienneteJours()); // !! le WS inverse jours et annees !!
 			dateDernierChangement = d.getTime();
 			dateDernierChangementEstFuture = !d.before(Calendar.getInstance());		
 		}
